@@ -1,0 +1,98 @@
+extends base
+
+block content 
+  section.section.section-top
+    .container.container-top-section
+      h1.text-lft.heading-primary
+        span.heading-primary--main Search the currently
+        |           
+        span.heading-primary--sub missing people       
+    //- .search-row
+    //-   form.nav__search
+    //-     button.nav__search-btn
+    //-       i.ph.ph-magnifying-glass
+    //-     |           
+    //-     input.nav__search-input(type='text', placeholder='Search Person Name')    
+    .search-row
+      form.nav__search
+          button.nav__search-btn
+            i.ph.ph-magnifying-glass
+          |           
+          input.nav__search-input(type='text', placeholder='Search Person Name')
+          button.btn-search#btn-search(type="submit") Search
+      form.nav__filter
+        select.nav__search-select(name='sortBy')
+          option(value='') Sort by
+          option(value='name') Sort by Name
+          option(value='age') Sort by Age
+          // Add other sorting options as needed
+
+        select.nav__search-select(name='filterCountry')
+          option(value='') Filter by Country
+          option(value='USA') Filter by Country: USA
+          option(value='UK') Filter by Country: UK
+          // Add other country filter options as needed
+
+        select.nav__search-select(name='filterGender')
+          option(value='') Gender filter
+          option(value='male') Male
+          option(value='female') Female
+          option(value='non-binary') Non-binary
+          // Add other city filter options as needed
+        button.btn-search#btn-filter(type="submit") Apply filters
+
+        // Add more filter options as needed (e.g., missing since, gender, etc.)
+
+  main.main
+    .card-container
+      each person in persons
+        .card
+          .card__header
+            .card__picture
+              .card__picture-overlay &nbsp;
+              |               
+              //- img.card__picture-img(src='/img/users/default.jpg', alt=`${person.firstName} Photo`)
+              img.card__picture-img(src=`img/persons/${person.photo}`, alt=`${person.firstName} Photo`)
+          |           
+          .card__details
+            h4.card__sub-heading= `${person.firstName} ${person.lastName}`
+            |             
+            p.card__text= `${person.clothingDescription} ${person.additionalDetails}`
+            |             
+            .card__data 
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              |               
+              span= `${person.city}, ${person.country}`
+            |             
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-calendar')
+              |
+
+              span= person.lastSeenDate.toLocaleString('en-us',{day:'numeric', month: 'long', year: 'numeric'})
+            |             
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-clock')
+              |               
+              span= person.foundAt.toLocaleString('en-us', {hour:'numeric',minute:'numeric'})
+            |             
+            //- .card__data
+            //-   svg.card__icon
+            //-     use(xlink:href='img/icons.svg#icon-user')
+            //-   |               
+            //-   span 25 people
+          |           
+          .card__footer
+            //- p
+            //-   span.card__footer-value gender: 
+            //-   |               
+            //-   span.card__footer-text= person.gender
+            //- |             
+            //- p.card__ratings
+            //-   span.card__footer-value Approx Age: 
+            //-   |               
+            //-   span.card__footer-text= person.approxAge
+            //- |             
+            a.btn.btn--green.btn--small(href=`/persons/${person._id}`) Details

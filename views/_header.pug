@@ -1,0 +1,20 @@
+header.header
+  //- nav.nav.nav--tours
+  //-   a.nav__el(href="#") All Persons
+  .header__logo
+    img(src="/img/findReunite-logo-white-.png", alt="findReunite Logo")
+  nav.nav.nav--tours
+    a.nav__el(href="/") Home
+    a.nav__el(href="/search-person") Search Person
+    a.nav__el(href="#") About
+    a.nav__el(href="#") Contact Us
+  nav.nav.nav--user
+    if user
+      a.nav__el.nav__el--logout Log out
+      a.nav__el(href='/me')
+        img.nav__user-img(src=`/img/users/${user.photo}`, alt=`Photo of ${user.name}`)
+        //- img.nav__user-img(src=`img/users/default.jpg`, alt=`Photo of ${user.name}`)
+        span= user.name.split(' ')[0]
+    else
+      a.nav__el(href="/login") Log in
+      a.nav__el.nav__el--cta(href="/signup") Sign up

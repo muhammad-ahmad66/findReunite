@@ -1,0 +1,120 @@
+extends base
+
+mixin overviewBox(label, text, icon)
+  .overview-box__detail
+    svg.overview-box__icon
+      use(xlink:href=`/img/icons.svg#icon-${icon}`)
+    span.overview-box__label= label
+    span.overview-box__text= text
+  
+
+
+
+block content
+  section.section-header
+    .header__hero
+      .header__hero-overlay &nbsp;
+      img.header__hero-img(src='/img/nat-1.jpg', alt='Tour 5')
+
+    .heading-box
+      h1.heading-primary
+        span= `Detail About ${person.firstName} ${person.lastName}`
+      .heading-box__group
+        .heading-box__detail
+          svg.heading-box__icon
+            use(xlink:href='/img/icons.svg#icon-clock')
+          - const reportedDate = new Date(person.foundAt);
+          - const currentDate = new Date();
+          - const differenceInMilliseconds = currentDate-reportedDate 
+
+          - const millisecondsInDay = 1000 * 60 * 60 * 24;
+          - const millisecondsInYear = millisecondsInDay * 365.25; // Approximation for leap years
+          - const millisecondsInMonth = millisecondsInYear / 12; // Approximation for average month
+
+          - const yearsDifference = Math.floor(differenceInMilliseconds / millisecondsInYear);
+          - const monthsDifference = Math.floor((differenceInMilliseconds % millisecondsInYear) / millisecondsInMonth);
+          - const daysDifference = Math.floor((differenceInMilliseconds % millisecondsInMonth) / millisecondsInDay);
+          span.heading-box__text= `reported ${daysDifference}  days Ago.`
+
+        .heading-box__detail
+          svg.heading-box__icon
+            use(xlink:href='/img/icons.svg#icon-map-pin')
+          span.heading-box__text= `${person.city} ${person.country}`
+
+  section.section-description
+    .overview-box
+      div
+        .overview-box__group
+          h2.heading-secondary.ma-bt-lg Quick Info
+          +overviewBox('gender', person.gender, 'calendar')
+          +overviewBox('Approx. Age', person.approxAge, 'trending-up')
+          +overviewBox('Unique Identity', person.UniqueIdentifier, 'trending-up')
+          +overviewBox('Hair Texture', person.HairColor, 'trending-up')
+
+
+        .overview-box__group
+          h2.heading-secondary.ma-bt-lg Reported person
+          .overview-box__detail
+            img.overview-box__img(src='/img/users/user-19.jpg', alt='Lead guide')
+            span.overview-box__label User
+            span.overview-box__text M Ahmad
+          //- .overview-box__detail
+          //-   img.overview-box__img(src='/img/users/user-18.jpg', alt='Tour guide')
+          //-   span.overview-box__label Tour guide
+          //-   span.overview-box__text Lisa Brown
+          //- .overview-box__detail
+          //-   img.overview-box__img(src='/img/users/user-17.jpg', alt='Intern')
+          //-   span.overview-box__label Intern
+          //-   span.overview-box__text Max Smith
+
+    .description-box
+      h2.heading-secondary.ma-bt-lg= `About ${person.firstName} ${person.lastName}`
+      - if(person.clothingDescription)
+        p.description__text= person.clothingDescription
+      
+      - if(person.additionalDetails)
+        p.description__text= person.additionalDetails
+      //- p.description__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      p.description__text Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!
+
+  //- section.section-pictures
+    .picture-box
+      img.picture-box__img.picture-box__img--1(src='/img/tours/tour-1-1.jpg', alt='The Park Camper Tour 1')
+    .picture-box
+      img.picture-box__img.picture-box__img--2(src='/img/tours/tour-5-2.jpg', alt='The Park Camper Tour 1')
+    .picture-box
+      img.picture-box__img.picture-box__img--3(src='/img/tours/tour-5-3.jpg', alt='The Park Camper Tour 1')
+
+  //- section.section-map
+  //-   #map
+
+  //- section.section-reviews
+    .reviews
+
+      .reviews__card
+        .reviews__avatar
+          img.reviews__avatar-img(src='/img/users/user-7.jpg', alt='Jim Brown')
+          h6.reviews__user Jim Brown
+        p.reviews__text Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dignissimos sint quo commodi corrupti accusantium veniam saepe numquam.
+        .reviews__rating
+          svg.reviews__star.reviews__star--active
+            use(xlink:href='/img/icons.svg#icon-star')
+          svg.reviews__star.reviews__star--active
+            use(xlink:href='/img/icons.svg#icon-star')
+          svg.reviews__star.reviews__star--active
+            use(xlink:href='/img/icons.svg#icon-star')
+          svg.reviews__star.reviews__star--active
+            use(xlink:href='/img/icons.svg#icon-star')
+          svg.reviews__star.reviews__star--active
+            use(xlink:href='/img/icons.svg#icon-star')
+
+  section.section-cta
+    .cta
+      .cta__img.cta__img--logo
+        img(src='/img/findReunite logo Square-01.png', alt='Natours logo')
+      img.cta__img.cta__img--1(src='/img/tour-5-2.jpg', alt='')
+      img.cta__img.cta__img--2(src='/img/tour-5-1.jpg', alt='')
+      .cta__content
+        h2.heading-secondary Connect with the Reported Person
+        p.cta__text Do you need any additional details or recognize this person? Connect with them to help bring them home.
+        button.btn.btn--green.span-all-rows Contact Now

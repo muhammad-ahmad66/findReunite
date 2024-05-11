@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    //- meta(http-equiv="Content-Security-Policy" content="script-src 'self' 'cdnjs.cloudflare.com';")
+
+    script(src='https://unpkg.com/@phosphor-icons/web')
+
+    title FindReunite | #{title}
+    link(rel="stylesheet", href="/css/base.css")
+    link(rel="stylesheet", href="/css/foundForm.css")
+    link(rel="shortcut icon" href="/img/findReunite Icon Black.png" type="image/x-icon")
+
+
+  body
+    // HEADER
+    //- For CSS classes we're using BEM Notation.
+    include _header
+
+    // MAIN CONTENT
+    block content
+      h1 This is a placeholder heading
+    
+
+    // FOOTER
+    include _footer
+
+    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js")
+    //- script(src="/js/login.js")
+    script(src="/js/bundle.js")

@@ -1,0 +1,150 @@
+extends base
+
+block content
+  section.section-hero
+    // <img src="img/hero-img.jpg" alt="Hero image">
+    .section-hero__left-column
+      h1#heading
+        span.color-primary find
+        | Reunite
+      |           
+      p#heading A platform dedicated to reuniting families.
+      |           
+      p#heading
+        | Assisting in locating missing individuals, as well as reuniting them
+        | with their families and loved ones.
+      |           
+      .section-hero__buttons
+        a.btn.btn--green.btn--small(href='#') Report a Missing
+        |             
+        a.btn.btn--white.btn--small(href='/report-found-person') Someone found
+    |         
+    .section-hero__right-column
+  // ABOUT SECTION
+  //
+    <section class='section-about'>
+    <div class="section-about__left-column">
+    <h2>About Us</h2>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
+    repudiandae.
+    </p>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
+    repudiandae.
+    </p>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
+    repudiandae.
+    </p>
+    <div class="section-hero__buttons">
+    <a href="#" class="btn btn--green btn--small">Learn More ↘</a>
+    </div>
+    </div>
+    <div class="section-about__right-column">
+    <img src="img/about-image.jpg" alt="About image">
+    </div>
+    </section>
+  section.section-about
+    div
+      h2#heading.heading-secondary.text-center
+        | Discover Our Mission to Reunite Families
+    |         
+    .section-about__content
+      .section-about__left-column
+        h3.heading-tertiary Our Mission and Vision
+        |             
+        p.paragraph
+          | At FindReunite, we bring hope and solace to families and
+          | communities affected by missing loved ones. Leveraging technology
+          | and community-driven efforts, we reunite individuals with their
+          | families.
+        |             
+        h3.heading-tertiary Our Approach and Values
+        |             
+        p.paragraph
+          | With a dedicated team, we provide a platform empowering users to
+          | report missing persons, search for loved ones, and contribute to
+          | finding missing individuals. Our commitment to integrity,
+          | compassion, and innovation drives us to make a meaningful
+          | difference.
+        |             
+        a.btn-text(href='#') Learn more &rarr;
+      |           
+      .section-about__right-column
+        .composition
+          img.composition__photo.composition__photo--p1(srcset='img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w', sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px', alt='Photo 1', src='img/nat-1.jpg')
+          |               
+          img.composition__photo.composition__photo--p2(srcset='img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w', sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px', alt='Photo 2', src='img/nat-2.jpg')
+          |               
+          img.composition__photo.composition__photo--p3(srcset='img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w', sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px', alt='Photo 3', src='img/nat-3.jpg')
+          //
+            <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
+            <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
+            <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+  // ? SECTION FEATURES
+  section.section-features
+    .row
+      .col-1-of-4
+        .feature-box
+          i.feature-box__icon.icon-basic-world
+          |               
+          h3.heading-tertiary.u-margin-bottom-small
+            | Discover Hope
+          |               
+          p.feature-box__text
+            | Access our extensive database to search for missing persons and
+            | contribute to the effort of reuniting families.
+      |           
+      .col-1-of-4
+        .feature-box
+          i.feature-box__icon.icon-basic-compass
+          |               
+          h3.heading-tertiary.u-margin-bottom-small
+            | FINDING SOLUTIONS
+          |               
+          p.feature-box__text
+            | We provide innovative solutions and support to facilitate the
+            | search and reunification process for missing individuals.
+      |           
+      .col-1-of-4
+        .feature-box
+          i.feature-box__icon.icon-basic-map
+          |               
+          h3.heading-tertiary.u-margin-bottom-small
+            | Provide Information
+          |               
+          p.feature-box__text
+            | Enter detailed information about your missing relatives to
+            | enhance search efforts and increase the chances of
+            | reunification.
+      |           
+      .col-1-of-4
+        .feature-box
+          i.feature-box__icon.icon-basic-heart
+          |               
+          h3.heading-tertiary.u-margin-bottom-small
+            | EMPOWERING FAMILIES
+          |               
+          p.feature-box__text
+            | Empower families and loved ones with the tools and resources
+            | they need to navigate the challenging journey of searching for
+            | missing individuals.
+  |       
+  section.section-call-to-action
+    .container.container-cta
+      h2#heading.heading-secondary
+        | Seeking Support for a Loved One&apos;s Disappearance?
+      |           
+      p.text-lft.heading-tertiary.text-l-case
+        | Have you experienced the distress of a loved one going missing? Find
+        | solace and assistance here. Our platform offers resources, guidance,
+        | and a supportive community to help you navigate this challenging
+        | time with hope and resilience.
+      |           
+      .section-hero__buttons
+        a.btn.btn--green.btn--small.center-content(href='search-person')
+          | Report here 
+          i.ph.ph-caret-double-right
+        |             
+        a.btn.btn--white.btn--small.center-content(href='#') Get in Touch
