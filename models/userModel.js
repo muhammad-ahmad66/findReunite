@@ -55,6 +55,13 @@ const userSchema = mongoose.Schema({
     select: false,
   },
   passwordChangedAt: Date,
+
+  associatedPersons: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Person',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

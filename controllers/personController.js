@@ -2,6 +2,8 @@ const multer = require('multer');
 const sharp = require('sharp');
 
 const Person = require('./../models/personModel');
+const User = require('./../models/userModel');
+
 const APIFeatures = require('./../utils/apiFeature');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
@@ -51,7 +53,14 @@ exports.createPerson = catchAsync(async (req, res, next) => {
   if (req.file) req.body.photo = req.file.filename;
   else req.body.photo = `default.jpg`;
 
+  req.body.user = req.user._id;
+
   const newPerson = await Person.create(req.body);
+
+  // Updating AssociatedUser
+  const user = await User.findById(req.user.id);
+  user.associatedPersons.push(newPerson._id);
+  await user.save({ validateBeforeSave: false });
 
   res.status(201).json({
     status: 'success',
@@ -88,6 +97,8 @@ exports.getAllPersons = async (req, res) => {
 exports.getPerson = async (req, res, next) => {
   try {
     // const person = await Person.findOne({ _id: req.params.id });
+    // const tour = await Tour.findById(req.params.id).populate('guides');
+
     const person = await Person.findById(req.params.id);
 
     if (!person) {

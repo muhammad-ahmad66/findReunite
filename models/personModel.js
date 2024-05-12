@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const User = require('./userModel');
+
 const personSchema = new mongoose.Schema(
   {
     firstName: {
@@ -76,15 +78,15 @@ const personSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    },
   },
   { collection: 'persons' },
 );
 
 // Pre Save Middleware
-// personSchema.pre('save', function (next) {
-//   console.log(this);
-//   next();
-// });
 
 // Pre Query Middleware
 // personSchema.pre(/^find/, function (next) {
@@ -99,19 +101,77 @@ personSchema.pre(/^find/, function (next) {
   next();
 });
 
-// personSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'users',
-//     select: '-__v',
-//   });
+personSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: '-__v',
+  });
 
-//   next();
-// });
+  next();
+});
 
 personSchema.post(/^find/, function (docs, next) {
   console.log(`This query took ${Date.now() - this.start} milliseconds`);
   next();
 });
+
+// // Middleware to execute before saving a person document
+// personSchema.pre('save', { validateBeforeSave: false }, async function (next) {
+//   // Ensure associated user exists
+//   if (!this.user) {
+//     throw new Error('Associated user not provided.');
+//   }
+
+//   try {
+//     // Find the associated user
+//     const user = await User.findById(this.user);
+
+//     if (!user) {
+//       throw new Error('Associated user not found.');
+//     }
+
+//     // Add the current person's ID to the user's associatedPersons array
+//     user.associatedPersons.push(this._id);
+
+//     // Save the updated user document
+//     await user.save();
+
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// // Middleware to execute before removing a person document
+// personSchema.pre(
+//   'remove',
+//   { validateBeforeSave: false },
+//   async function (next) {
+//     // Ensure associated user exists
+//     if (!this.user) {
+//       throw new Error('Associated user not provided.');
+//     }
+
+//     try {
+//       // Find the associated user
+//       const user = await User.findById(this.user);
+
+//       if (!user) {
+//         throw new Error('Associated user not found.');
+//       }
+
+//       // Remove the current person's ID from the user's associatedPersons array
+//       user.associatedPersons.pull(this._id);
+
+//       // Save the updated user document
+//       await user.save();
+
+//       next();
+//     } catch (error) {
+//       next(error);
+//     }
+//   },
+// );
 
 const Person = mongoose.model('Person', personSchema);
 

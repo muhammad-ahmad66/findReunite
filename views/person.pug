@@ -55,9 +55,9 @@ block content
         .overview-box__group
           h2.heading-secondary.ma-bt-lg Reported person
           .overview-box__detail
-            img.overview-box__img(src='/img/users/user-19.jpg', alt='Lead guide')
+            img.overview-box__img(src=`/img/users/${person.user.photo}`, alt= `${person.user.name} Photo`)
             span.overview-box__label User
-            span.overview-box__text M Ahmad
+            span.overview-box__text= person.user.name
           //- .overview-box__detail
           //-   img.overview-box__img(src='/img/users/user-18.jpg', alt='Tour guide')
           //-   span.overview-box__label Tour guide

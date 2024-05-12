@@ -106,7 +106,11 @@ block content
                 use(xlink:href='/img/icons.svg#icon-calendar')
               |
 
-              span= person.lastSeenDate.toLocaleString('en-us',{day:'numeric', month: 'long', year: 'numeric'})
+              //- span= person.lastSeenDate.toLocaleString('en-us',{day:'numeric', month: 'long', year: 'numeric'})
+              - if (person.lastSeenDate)
+                span= person.lastSeenDate.toLocaleString('en-us',{day:'numeric', month: 'long', year: 'numeric'})
+              - else
+                span Last seen date not available
             |             
             .card__data
               svg.card__icon
