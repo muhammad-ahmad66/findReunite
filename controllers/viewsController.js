@@ -13,20 +13,29 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
   //* 1) GET PERSON DATA FROM DB COLLECTION
   // const persons = await Person.find();
 
-  const features = new APIFeatures(Person.find(), req.query);
-  // features.filter().sort().limitFields().paginate();
-  features.sort().paginate();
+  // const features = new APIFeatures(Person.find(), req.query);
+  // // features.filter().sort().limitFields().paginate();
+  // features.sort().paginate();
+  let filter = {};
+  // if (req.params.tourId) filter = { tour: req.params.tourId };
+  // if (req.params.name) filter = { firstName: req.params.name };
+  console.log('HIIIIIIIII', req.params);
+  if (req.params.name) {
+    const regex = new RegExp(req.params.name, 'i');
+    filter = {
+      $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
+    };
+  }
+
+  const features = new APIFeatures(Person.find(filter), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  // const doc = await features.query.explain();
 
   // EXECUTE QUERY
   const persons = await features.query;
-
-  // res.status(200).json({
-  //   status: 'success',
-  //   result: persons.length,
-  //   data: {
-  //     persons,
-  //   },
-  // });
 
   //* 2) BUILD TEMPLATE
   //? Built in views folder, search-person.pug
@@ -35,6 +44,7 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
 
   res.status(200).render('search-person', {
     title: 'Search-Person',
+    query: req.query,
     persons,
   });
 });
@@ -78,5 +88,30 @@ exports.getSignupForm = catchAsync(async (req, res, next) => {
 exports.getAccount = (req, res) => {
   res.status(200).render('account', {
     title: 'Your account',
+  });
+};
+
+// ! RENDER STATIC PAGES
+exports.getAboutGroup = (req, res) => {
+  res.status(200).render('about-group', {
+    title: 'About our Group || CS-MUST-2020-24',
+  });
+};
+
+exports.getAcknowledge = (req, res) => {
+  res.status(200).render('acknowledge', {
+    title: 'Acknowledgement for Supervisory Guidance',
+  });
+};
+
+exports.getPrivacyPolicy = (req, res) => {
+  res.status(200).render('privacy-policy', {
+    title: 'Privacy Policy',
+  });
+};
+
+exports.getTerms = (req, res) => {
+  res.status(200).render('terms', {
+    title: 'Terms of Service',
   });
 };

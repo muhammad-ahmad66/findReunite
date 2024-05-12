@@ -1,0 +1,23 @@
+.container-acknowledge {
+  max-width: 80rem;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.container-acknowledge h1 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.container-acknowledge h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.container-acknowledge .paragraph {
+  font-weight: 500;
+}

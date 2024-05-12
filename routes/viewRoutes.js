@@ -14,8 +14,8 @@ const router = express.Router();
 // router.get('/overview', viewsController.getOverview)
 router.get('/', authController.isLoggedIn, viewsController.getOverview);
 router.get(
-  '/search-person',
-  authController.isLoggedIn,
+  `/search-person`,
+  authController.protect,
   viewsController.getSearchPerson,
 );
 
@@ -29,4 +29,11 @@ router.get(
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.get('/me', authController.protect, viewsController.getAccount);
+
+// Static Pages
+router.get('/about-group', viewsController.getAboutGroup);
+router.get('/acknowledge', viewsController.getAcknowledge);
+router.get('/privacy-policy', viewsController.getPrivacyPolicy);
+router.get('/terms', viewsController.getTerms);
+
 module.exports = router;

@@ -18,30 +18,66 @@ block content
           button.nav__search-btn
             i.ph.ph-magnifying-glass
           |           
-          input.nav__search-input(type='text', placeholder='Search Person Name')
+          input.nav__search-input(type='text', placeholder='Search Person Name', id="search-person-name")
           button.btn-search#btn-search(type="submit") Search
       form.nav__filter
-        select.nav__search-select(name='sortBy')
+        select.nav__search-select(name='sort', id="sort-by")
           option(value='') Sort by
-          option(value='name') Sort by Name
+          option(value='firstName') Sort by Name
           option(value='age') Sort by Age
           // Add other sorting options as needed
 
-        select.nav__search-select(name='filterCountry')
-          option(value='') Filter by Country
-          option(value='USA') Filter by Country: USA
-          option(value='UK') Filter by Country: UK
+        select.nav__search-select(name='approxAge', id="approxAge")
+          option(value='') Approx. Age
+          option(value='1,20') less then 20
+          option(value='20,45')  between 20 and 45
+          option(value='45,70')  between 45 and 70
+          option(value='70,120')  greater than 70
+          // Add other sorting options as needed
+
+        select.nav__search-select(name='country', id='filter-country')
+          option(value='') Filter by Area
+          option(value='usa') USA
+          option(value='uk') UK
+          option(value='pakistan') Pakistan
+          option(value='india') India
           // Add other country filter options as needed
 
-        select.nav__search-select(name='filterGender')
+        select.nav__search-select(name='gender', id='filter-gender')
           option(value='') Gender filter
           option(value='male') Male
           option(value='female') Female
           option(value='non-binary') Non-binary
           // Add other city filter options as needed
-        button.btn-search#btn-filter(type="submit") Apply filters
+
+        //- button.btn-search#btn-filter(type="submit") Apply filters
 
         // Add more filter options as needed (e.g., missing since, gender, etc.)
+    
+    if(query.approxAge)
+      p.paragraph.paragraph-query-info Displaying results for ages between 
+        b #{query.approxAge.gte} 
+        | and 
+        b #{query.approxAge.lte}
+
+    if(query.sort)
+      p.paragraph.paragraph-query-info Displaying sorted results by the 
+       b #{query.sort} 
+       | field.
+
+    if(query.country)
+      p.paragraph.paragraph-query-info Displaying results for the Country name 
+       b= `${query.country[0].toUpperCase()}${query.country.slice(1)}`
+
+    if(query.gender)
+      p.paragraph.paragraph-query-info Displaying results for the Gender 
+       b= `${query.gender[0].toUpperCase()}${query.gender.slice(1)}`
+
+    if(query.firstName)
+      p.paragraph.paragraph-query-info Displaying results for the Name 
+        b= `${query.firstName[0].toUpperCase()}${query.firstName.slice(1)}`
+    
+
 
   main.main
     .card-container
@@ -96,3 +132,8 @@ block content
             //-   span.card__footer-text= person.approxAge
             //- |             
             a.btn.btn--green.btn--small(href=`/persons/${person._id}`) Details
+    .btn-container
+      a.btn.btn--small.btn--green.btn-prev(href="=") 
+        i.fa-solid.fa-arrow-left
+      a.btn.btn--small.btn--green.btn-next(href="=")
+        i.fa-solid.fa-arrow-right

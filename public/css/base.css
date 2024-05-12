@@ -88,6 +88,11 @@ body {
   background-color: #e0e0e0;
 }
 
+.line-full {
+  margin: 0 0;
+  background-color: #ccc;
+}
+
 .alert {
   position: fixed;
   top: 0;
@@ -1199,6 +1204,10 @@ body {
   align-self: center; */
 }
 
+#main-error {
+  flex: 40rem;
+}
+
 .error {
   position: absolute;
   top: 45%;
@@ -1677,4 +1686,9 @@ body {
 .section-top {
   background-color: #f7f7f7;
   padding: 1rem 6rem;
+}
+
+.paragraph-query-info {
+  margin-top: 1.6rem;
+  color: #eb4d4b;
 }

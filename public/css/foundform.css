@@ -1,5 +1,4 @@
 .reported-form-container {
-  border: 1px solid red;
   max-width: 90rem;
   margin: 0 auto;
   display: flex;
@@ -227,6 +226,7 @@
   background-color: transparent;
   border-bottom: 1px solid #999;
   margin-right: 1rem;
+  cursor: pointer;
 }
 
 .nav__search-select:focus {
@@ -235,4 +235,18 @@
 
 .nav__search-select option {
   color: #000; /* Use black color for options */
+  cursor: pointer;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.btn-prev i,
+.btn-next i {
+  font-size: 3rem;
 }
