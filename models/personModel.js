@@ -1,17 +1,10 @@
 const mongoose = require('mongoose');
 
-const User = require('./userModel');
-
 const personSchema = new mongoose.Schema(
   {
-    firstName: {
+    name: {
       type: String,
-      required: [true, 'A person must have a first name'],
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: [true, 'A person must have a last name'],
+      required: [true, 'A person must have a name'],
       trim: true,
     },
     gender: {
@@ -72,7 +65,7 @@ const personSchema = new mongoose.Schema(
         'Add some details about person, like about medical, physical or mental conditions.',
       ],
       minlength: [5, 'Additional details must be at least 5 character'],
-      maxlength: [300, 'Additional details must be at most 300 characters'],
+      maxlength: [900, 'Additional details must be at most 900 characters'],
     },
     foundAt: {
       type: Date,

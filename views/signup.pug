@@ -12,10 +12,19 @@ block content
           label.form__label(for='email') Email address
           input#email.form__input(type='email', placeholder='you@example.com', required)
         .form__group.ma-bt-md
+          label.form__label(for='contact') Phone Number
+          input#contact.form__input(type='text', placeholder='+923411080082', required)
+        .form__group.ma-bt-md
           label.form__label(for='password') Password
           input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
         .form__group.ma-bt-md
           label.form__label(for='password-confirm') Password
           input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+        .form__group.ma-bt-md
+          label.form__label(for='country') Country Name
+          input#country.form__input(type='text', placeholder='Your Country Name', required)
+        .form__group.ma-bt-md
+          label.form__label(for='city') City Name
+          input#city.form__input(type='text', placeholder='Your City Name', required)
         .form__group
           button.btn.btn--green Sign up

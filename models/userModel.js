@@ -34,6 +34,18 @@ const userSchema = mongoose.Schema({
       message: 'Passwords are not the same! Please try again',
     },
   },
+  contact: {
+    type: String,
+    required: [true, 'Please provide your contact number'],
+    validate: [
+      {
+        validator: function (contactNumber) {
+          return validator.isMobilePhone(contactNumber);
+        },
+        message: 'Please provide a valid phone number.',
+      },
+    ],
+  },
   location: {
     city: {
       type: String,

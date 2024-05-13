@@ -18,7 +18,7 @@ block content
 
     .heading-box
       h1.heading-primary
-        span= `Detail About ${person.firstName} ${person.lastName}`
+        span= `Detail About ${person.name}`
       .heading-box__group
         .heading-box__detail
           svg.heading-box__icon
@@ -68,7 +68,7 @@ block content
           //-   span.overview-box__text Max Smith
 
     .description-box
-      h2.heading-secondary.ma-bt-lg= `About ${person.firstName} ${person.lastName}`
+      h2.heading-secondary.ma-bt-lg= `About ${person.name}`
       - if(person.clothingDescription)
         p.description__text= person.clothingDescription
       

@@ -26,14 +26,7 @@ if (foundPersonForm)
 
     const form = new FormData();
 
-    form.append(
-      'firstName',
-      document.getElementById('firstName').value.toLowerCase(),
-    );
-    form.append(
-      'lastName',
-      document.getElementById('lastName').value.toLowerCase(),
-    );
+    form.append('name', document.getElementById('name').value.toLowerCase());
     form.append(
       'gender',
       document.getElementById('gender').value.toLowerCase(),
@@ -81,10 +74,13 @@ if (signupForm)
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
+    const contact = document.getElementById('contact').value;
+    const country = document.getElementById('country').value;
+    const city = document.getElementById('city').value;
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('password-confirm').value;
 
-    signup(name, email, password, passwordConfirm);
+    signup(name, email, contact, password, passwordConfirm, country, city);
   });
 
 // ! LOGGING USER OUT
@@ -139,7 +135,7 @@ if (searchForm)
 
     // searchPerson(name);
     if (name)
-      window.location.href = `http://127.0.0.1:800/search-person?firstName=${name}`;
+      window.location.href = `http://127.0.0.1:800/search-person?name=${name}`;
     else window.location.href = `http://127.0.0.1:800/search-person`;
   });
 

@@ -23,7 +23,7 @@ block content
       form.nav__filter
         select.nav__search-select(name='sort', id="sort-by")
           option(value='') Sort by
-          option(value='firstName') Sort by Name
+          option(value='name') Sort by Name
           option(value='age') Sort by Age
           // Add other sorting options as needed
 
@@ -88,10 +88,10 @@ block content
               .card__picture-overlay &nbsp;
               |               
               //- img.card__picture-img(src='/img/users/default.jpg', alt=`${person.firstName} Photo`)
-              img.card__picture-img(src=`img/persons/${person.photo}`, alt=`${person.firstName} Photo`)
+              img.card__picture-img(src=`img/persons/${person.photo}`, alt=`${person.name} Photo`)
           |           
           .card__details
-            h4.card__sub-heading= `${person.firstName} ${person.lastName}`
+            h4.card__sub-heading= `${person.name}`
             |             
             p.card__text= `${person.clothingDescription} ${person.additionalDetails}`
             |             
