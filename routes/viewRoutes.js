@@ -1,6 +1,7 @@
 const express = require('express');
 const viewsController = require('../controllers/viewsController');
 const authController = require('../controllers/authController');
+const personController = require('../controllers/personController');
 
 const router = express.Router();
 
@@ -16,10 +17,23 @@ router.get('/', authController.isLoggedIn, viewsController.getOverview);
 router.get(
   `/search-person`,
   authController.protect,
+  authController.restrictTo('admin'),
   viewsController.getSearchPerson,
 );
 
-router.get('/report-found-person', viewsController.getReportFound);
+// Route to render the form to add new person in found person collection
+router.get(
+  '/report-found-person',
+  authController.protect,
+  viewsController.getReportFound,
+);
+
+// Route to render the form to add new person to the missing person collection
+router.get(
+  '/report-missing',
+  authController.protect,
+  viewsController.getReportMissing,
+);
 
 router.get(
   '/persons/:id',

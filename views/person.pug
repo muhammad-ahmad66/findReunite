@@ -46,36 +46,44 @@ block content
       div
         .overview-box__group
           h2.heading-secondary.ma-bt-lg Quick Info
-          +overviewBox('gender', person.gender, 'calendar')
+          +overviewBox('gender', person.gender, 'trending-up')
           +overviewBox('Approx. Age', person.approxAge, 'trending-up')
           +overviewBox('Unique Identity', person.UniqueIdentifier, 'trending-up')
           +overviewBox('Hair Texture', person.HairColor, 'trending-up')
 
 
-        .overview-box__group
+        .overview-box__group.reported-person-info__group
           h2.heading-secondary.ma-bt-lg Reported person
           .overview-box__detail
             img.overview-box__img(src=`/img/users/${person.user.photo}`, alt= `${person.user.name} Photo`)
-            span.overview-box__label User
+            //- span.overview-box__label User
             span.overview-box__text= person.user.name
-          //- .overview-box__detail
-          //-   img.overview-box__img(src='/img/users/user-18.jpg', alt='Tour guide')
-          //-   span.overview-box__label Tour guide
-          //-   span.overview-box__text Lisa Brown
-          //- .overview-box__detail
-          //-   img.overview-box__img(src='/img/users/user-17.jpg', alt='Intern')
-          //-   span.overview-box__label Intern
-          //-   span.overview-box__text Max Smith
+          .reported-person-contact-info__group
+            .reported-person-contact-info
+              i.fa-solid.fa-phone
+              a.overview-box__text(href=`tel:${person.user.contact}`, target='_blank')= person.user.contact
+            
+            .reported-person-contact-info
+              i.fa-solid.fa-envelope
+              a.overview-box__text#lCase(href=`mailto:${person.user.email}`, target='_blank')= `${person.user.email}`
+
+            .reported-person-contact-info 
+              i.fa-solid.fa-map-marker-alt
+              a.overview-box__text(href=`https://www.google.com/maps?q=${person.user.city}`, target='_blank')= `${person.user.location.city}, ${person.user.location.country}`
+
+            
 
     .description-box
       h2.heading-secondary.ma-bt-lg= `About ${person.name}`
+      img.person-detail-photo(src=`/img/persons/${person.photo}`, alt=`${person.name} picture`)
       - if(person.clothingDescription)
+        label.description__label Clothing Description
         p.description__text= person.clothingDescription
       
       - if(person.additionalDetails)
+        label.description__label Additional Information
         p.description__text= person.additionalDetails
-      //- p.description__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      p.description__text Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!
+
 
   //- section.section-pictures
     .picture-box
@@ -115,6 +123,6 @@ block content
       img.cta__img.cta__img--1(src='/img/tour-5-2.jpg', alt='')
       img.cta__img.cta__img--2(src='/img/tour-5-1.jpg', alt='')
       .cta__content
-        h2.heading-secondary Connect with the Reported Person
-        p.cta__text Do you need any additional details or recognize this person? Connect with them to help bring them home.
+        h2.heading-secondary CONNECT WITH US
+        p.cta__text Do you need any additional details or recognize this person? Please contact us to help bring them home.
         button.btn.btn--green.span-all-rows Contact Now

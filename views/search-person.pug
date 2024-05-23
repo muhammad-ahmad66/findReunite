@@ -6,7 +6,17 @@ block content
       h1.text-lft.heading-primary
         span.heading-primary--main Search the currently
         |           
-        span.heading-primary--sub missing people       
+        span.heading-primary--sub missing people 
+
+      .upload-image-box 
+        section.image-upload-section
+          h2 Search by Image
+          #drop-area.drop-area
+            p Drag &amp; Drop your image here or
+            input#fileElem(type='file' accept='image/*' onchange='handleFiles(this.files)')
+            label.button(for='fileElem') Choose a file
+            span#fileLabel No file chosen
+          #preview      
     //- .search-row
     //-   form.nav__search
     //-     button.nav__search-btn
@@ -81,6 +91,7 @@ block content
 
   main.main
     .card-container
+      - const totalPersons = persons.length;
       each person in persons
         .card
           .card__header
@@ -137,7 +148,13 @@ block content
             //- |             
             a.btn.btn--green.btn--small(href=`/persons/${person._id}`) Details
     .btn-container
-      a.btn.btn--small.btn--green.btn-prev(href="=") 
-        i.fa-solid.fa-arrow-left
-      a.btn.btn--small.btn--green.btn-next(href="=")
-        i.fa-solid.fa-arrow-right
+      - const totalPages = Math.ceil(persons.length / 8);
+      - const firstPage = 1;
+      - const lastPage = totalPages;
+
+      if page > firstPage
+        a.btn.btn--small.btn--green.btn-prev(href=`?page=${page - 1}`)
+          i.fa-solid.fa-arrow-left
+      if page < lastPage
+        a.btn.btn--small.btn--green.btn-next(href=`?page=${page + 1}`)
+          i.fa-solid.fa-arrow-right

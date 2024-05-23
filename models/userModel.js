@@ -69,6 +69,14 @@ const userSchema = mongoose.Schema({
   passwordChangedAt: Date,
 
   associatedPersons: [
+    // to store the ids of uploaded found persons.
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Person',
+    },
+  ],
+  missingReportedPersons: [
+    // To store ids of reported missing persons
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Person',

@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const personRoutes = require('./routes/personRoutes');
 const userRoutes = require('./routes/userRoutes');
 const viewRoutes = require('./routes/viewRoutes');
+const missingPersonRoutes = require('./routes/missingPersonRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -47,6 +48,7 @@ app.use((req, res, next) => {
 app.use('/', viewRoutes);
 app.use('/api/v1/persons', personRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/missing-persons', missingPersonRoutes);
 
 // ---------
 // ERROR HANDLING

@@ -1,0 +1,43 @@
+extends base 
+
+block content
+  main.main
+    .reported-form-container
+      form.reported-form.missing-person-form(action="", method="post", enctype="multipart/form-data")
+        .reported-form__group
+          label.reported-form__label(for="name") Full Name:
+          input.reported-form__input(type="text", id="name", name="name", placeholder="Enter Person's name")
+        .reported-form__group
+          label.reported-form__label Gender:
+          select.reported-form__input(id="gender", name="gender")
+            option(value="male") Male
+            option(value="female") Female
+            option(value="non-binary") Non-binary
+        .reported-form__group
+          label.reported-form__label(for="age") Age:
+          input.reported-form__input(type="number", id="age", name="age", placeholder="Enter age")
+        .reported-form__group
+          label.reported-form__label(for="contact") Contact Information:
+          input.reported-form__input(type="text", id="contact", name="contact", placeholder="Enter contact information of any relative")
+        .reported-form__group
+          label.reported-form__label(for="city") City:
+          input.reported-form__input(type="text", id="city", name="location[city]", placeholder="Enter city name")
+        .reported-form__group
+          label.reported-form__label(for="country") Country:
+          input.reported-form__input(type="text", id="country", name="location[country]", placeholder="Enter country name")
+        .reported-form__group
+          label.reported-form__label(for="address") Address:
+          input.reported-form__input(type="text", id="address", name="location[address]", placeholder="Enter address")
+        //- .reported-form__group
+        //-   label.reported-form__label(for="photo") Photo:
+        //-   input.reported-form__upload(type="file", id="photo", name="photo", accept="image/*")
+        .reported-form__group
+          img.form__user-photo(src=`img/users/default.jpg`, alt=` Photo`)
+          input.form__upload(type="file", accept="image/*", id="photo", name="photo")
+          label(for="photo") Choose a photo
+
+        .reported-form__group.full-width
+          label.reported-form__label(for="additionalDetails") Additional Details:
+          textarea.reported-form__input(id="additionalDetails", name="additionalDetails", placeholder="Enter any additional details, like physical, mental or medical conditions... of missing person", rows='6')
+        .reported-form__group
+          button.btn.btn--green(type="submit") Submit

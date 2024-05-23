@@ -11,21 +11,15 @@ exports.getOverview = (req, res) => {
 
 exports.getSearchPerson = catchAsync(async (req, res, next) => {
   //* 1) GET PERSON DATA FROM DB COLLECTION
-  // const persons = await Person.find();
 
-  // const features = new APIFeatures(Person.find(), req.query);
-  // // features.filter().sort().limitFields().paginate();
-  // features.sort().paginate();
   let filter = {};
-  // if (req.params.tourId) filter = { tour: req.params.tourId };
-  // if (req.params.name) filter = { firstName: req.params.name };
-  console.log('HIIIIIIIII', req.params);
-  if (req.params.name) {
-    const regex = new RegExp(req.params.name, 'i');
-    filter = {
-      $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
-    };
-  }
+
+  // if (req.params.name) {
+  //   const regex = new RegExp(req.params.name, 'i');
+  //   filter = {
+  //     $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
+  //   };
+  // }
 
   const features = new APIFeatures(Person.find(filter), req.query)
     .filter()
@@ -36,6 +30,9 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
 
   // EXECUTE QUERY
   const persons = await features.query;
+  const totalPerson = persons.length;
+
+  const page = req.query.page ? parseInt(req.query.page, 10) : 1;
 
   //* 2) BUILD TEMPLATE
   //? Built in views folder, search-person.pug
@@ -46,6 +43,7 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
     title: 'Search-Person',
     query: req.query,
     persons,
+    page,
   });
 });
 
@@ -54,6 +52,12 @@ exports.getReportFound = catchAsync(async (req, res, next) => {
     title: 'Report Found Person',
   });
 });
+
+exports.getReportMissing = (req, res) => {
+  res.status(200).render('missingPersonForm', {
+    title: 'Report Missing Person',
+  });
+};
 
 exports.getPersonDetail = catchAsync(async (req, res, next) => {
   //* 1) GET THE DATA FROM THE DATABASE FOR THE REQUESTED PERSON (INCLUDING USER'S DATA AS WELL)
@@ -115,3 +119,45 @@ exports.getTerms = (req, res) => {
     title: 'Terms of Service',
   });
 };
+
+const MissingPerson = require('../models/missingPersonModel');
+const FoundPerson = require('../models/personModel');
+// const catchAsync = require('../utils/catchAsync');
+const checkSimilarity = require('../utils/checkSimilarity');
+const sendNotificationEmail = require('../utils/email');
+
+exports.checkForMatches = catchAsync(async (req, res, next) => {
+  const missingPerson = req.body;
+
+  // Fetch all found persons
+  const foundPersons = await FoundPerson.find();
+
+  // Check for matches
+  let matchFound = false;
+  let matchedPerson = null;
+  foundPersons.forEach((foundPerson) => {
+    if (checkSimilarity(missingPerson, foundPerson)) {
+      matchFound = true;
+      matchedPerson = foundPerson;
+    }
+  });
+
+  if (matchFound) {
+    // Send email notification
+    await sendNotificationEmail(req.user.email, matchedPerson);
+    res.status(200).json({
+      status: 'success',
+      data: {
+        matchFound,
+        matchedPerson,
+      },
+    });
+    // res.status(200).render('matchFound', {
+    //   title: 'Match Found',
+    //   matchFound,
+    //   matchedPerson,
+    // });
+  }
+
+  next();
+});

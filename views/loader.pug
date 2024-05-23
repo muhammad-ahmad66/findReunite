@@ -1,0 +1,16 @@
+extends base 
+
+block content 
+  .loader#loader
+
+  script.
+    setTimeout(() => {
+      window.location.href = '!{nextPage}';
+    }, 3000); // Delay for 3 seconds (3000 milliseconds)
+
+  //- script.
+  //-   // Hide the loader after 1 second
+  //-   setTimeout(() => {
+  //-     const loader = document.getElementById('loader');
+  //-     loader.style.display = 'none';
+  //-   }, 1000); // 1000 milliseconds = 1 second
