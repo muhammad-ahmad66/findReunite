@@ -1,3 +1,4 @@
+const User = require('../models/userModel');
 const Person = require('../models/personModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -53,6 +54,7 @@ exports.getReportFound = catchAsync(async (req, res, next) => {
   });
 });
 
+
 exports.getReportMissing = (req, res) => {
   res.status(200).render('missingPersonForm', {
     title: 'Report Missing Person',
@@ -89,9 +91,28 @@ exports.getSignupForm = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAccount = (req, res) => {
+exports.getAccount = async (req, res) => {
+  req.params.id = req.user.id;
+  let query = User.findById(req.params.id).populate([
+    {
+      path: 'associatedPersons',
+      select: 'name photo additionalDetails country city',
+    },
+    {
+      path: 'missingReportedPersons',
+      select: 'name photo additionalDetails location.country location.city',
+    },
+  ]);
+  // if (popOptions) query = query.populate(popOptions);
+  const doc = await query;
+
+  if (!doc) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+
   res.status(200).render('account', {
     title: 'Your account',
+    user: doc,
   });
 };
 

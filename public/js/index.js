@@ -5,6 +5,7 @@ import { updateSettings } from './updateSettings';
 import { foundForm } from './foundPersonForm';
 import { searchPerson } from './searchPerson';
 import { missingForm } from './missingPersonForm';
+import { updatePerson } from './updatePersonForm';
 
 // ! SELECTING ELEMENTS
 const loginForm = document.querySelector('.form--login');
@@ -15,18 +16,92 @@ const userPasswordForm = document.querySelector('.form-user-password');
 
 const foundPersonForm = document.querySelector('.reported-form');
 const missingPersonForm = document.querySelector('.missing-person-form');
+const updatePersonForm = document.querySelector('.update-person-form');
 const searchForm = document.querySelector('.nav__search');
 const filterForm = document.querySelector('.nav__filter');
 
-const btnNext = document.querySelector('.btn-next');
-const btnPrev = document.querySelector('.btn-prev');
+// UPDATE PERSON DETAIL
+// if (updatePersonForm)
+//   updatePersonForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     const name = document.getElementById('name').value;
+//     const gender = document.getElementById('gender').value;
+//     const approxAge = document.getElementById('approxAge').value;
+//     const UniqueIdentifier = document.getElementById('UniqueIdentifier').value;
+//     const clothingDescription = document.getElementById(
+//       'clothingDescription',
+//     ).value;
+//     const HairColor = document.getElementById('HairColor').value;
+//     // const photo = document.getElementById('photo').files[0];
+//     const country = document.getElementById('country').value;
+//     const city = document.getElementById('city').value;
+//     const lastSeenDate = document.getElementById('lastSeenDate').value;
+//     const additionalDetails =
+//       document.getElementById('additionalDetails').value;
+
+//     updatePerson({
+//       name,
+//       gender,
+//       approxAge,
+//       UniqueIdentifier,
+//       clothingDescription,
+//       additionalDetails,
+//       HairColor,
+//       country,
+//       city,
+//       lastSeenDate,
+//     });
+//   });
+
+document.querySelectorAll('.update-button').forEach((button) => {
+  button.addEventListener('click', async (event) => {
+    const personId = event.target.getAttribute('data-id');
+    try {
+      // Fetch the update form
+      const response = await axios.get(`/update-person/${personId}`);
+      // Insert the update form into the container
+      document.getElementById('updateFormContainer').innerHTML = response.data;
+
+      // Add event listener to the form submit button
+      document
+        .getElementById('updateForm')
+        .addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const updatedDetails = {
+            name: document.getElementById('name').value,
+            gender: document.getElementById('gender').value,
+            approxAge: document.getElementById('approxAge').value,
+            UniqueIdentifier: document.getElementById('UniqueIdentifier').value,
+            clothingDescription: document.getElementById('clothingDescription')
+              .value,
+            HairColor: document.getElementById('HairColor').value,
+            //  photo : document.getElementById('photo').files[0],
+            country: document.getElementById('country').value,
+            city: document.getElementById('city').value,
+            lastSeenDate: document.getElementById('lastSeenDate').value,
+            additionalDetails:
+              document.getElementById('additionalDetails').value,
+          };
+          try {
+            await axios.patch(`/api/persons/${personId}`, updatedDetails);
+            alert('Person updated successfully');
+            // Optionally, refresh the page or update the UI to reflect the changes
+          } catch (error) {
+            console.error('Error updating person:', error);
+          }
+        });
+    } catch (error) {
+      console.error('Error fetching update form:', error);
+    }
+  });
+});
 
 // Show the loader when the page starts loading
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader');
   loader.style.display = 'block'; // Display the loader
 
-  console.log('loding....');
+  console.log('loading....');
   // Hide the loader after 1 second
   setTimeout(() => {
     loader.style.display = 'none';
@@ -216,25 +291,26 @@ if (filterForm)
 let urlParams = new URLSearchParams(window.location.search);
 let page = parseInt(urlParams.get('page')) || 1;
 
-// // Function to handle click event on the next button
-// if (btnNext) {
-//   btnNext.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     // Increment page number
-//     ++page;
-//     // Update URL with new page number
-//     window.location.href = `http://127.0.0.1:800/search-person?page=${page}`;
-//   });
-// }
+const navItems = document.querySelectorAll('.side-nav a');
+const contentContainers = document.querySelectorAll(
+  '.user-view__form-container',
+);
 
-// if (btnPrev)
-//   btnPrev.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     // Increment page number
-//     --page;
-//     // Update URL with new page number
-//     window.location.href = `http://127.0.0.1:800/search-person?page=${page}`;
-//   });
-// if (page == 1) {
-//   btnPrev.style.display = 'none';
-// }
+navItems.forEach((item) => {
+  item.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    // Remove active class from all nav items and content containers
+    navItems.forEach((nav) =>
+      nav.parentElement.classList.remove('side-nav--active'),
+    );
+    contentContainers.forEach((container) =>
+      container.classList.remove('active'),
+    );
+
+    // Add active class to the clicked nav item
+    const sectionId = event.target.getAttribute('data-section');
+    document.getElementById(sectionId).classList.add('active');
+    event.target.parentElement.classList.add('side-nav--active');
+  });
+});

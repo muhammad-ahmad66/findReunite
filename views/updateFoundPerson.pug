@@ -1,0 +1,49 @@
+extends base 
+
+
+block content
+  main.main
+    .reported-form-container
+      form.reported-form.update-person-form(action="#", method="post")
+        .reported-form__group
+          label.reported-form__label(for="name") Full Name:
+          input.reported-form__input(type="text", id="name", name="name", placeholder="Enter Person's name")
+        .reported-form__group
+          label.reported-form__label Gender:
+          select.reported-form__input(id="gender", name="gender")
+            option(value="male") Male
+            option(value="female") Female
+            option(value="non-binary") non-binary
+        .reported-form__group
+          label.reported-form__label(for="approxAge") Approximate Age:
+          input.reported-form__input(type="number", id="approxAge", name="approxAge", placeholder="Enter approximate age")
+        .reported-form__group
+          label.reported-form__label(for="UniqueIdentifier") Unique Identifier:
+          input.reported-form__input(type="text", id="UniqueIdentifier", name="UniqueIdentifier", placeholder="Enter any unique identifier")
+        .reported-form__group.full-width
+          label.reported-form__label(for="clothingDescription") Clothing Description:
+          textarea.reported-form__input(type="text", id="clothingDescription", name="clothingDescription", placeholder="Enter him/her clothing description", rows='3')
+        .reported-form__group
+          label.reported-form__label(for="HairColor") Hair Color:
+          input.reported-form__input(type="text", id="HairColor", name="HairColor", placeholder="Enter hair color")
+        .reported-form__group
+          //- label.reported-form__label(for="photo") Photo:
+          //- input.reported-form__upload(type="file", id="photo", name="photo", accept="image/*")
+          //- label(for="photo") Upload Photo
+          img.form__user-photo(src=`img/users/default.jpg`, alt=` Photo`)
+          input.form__upload(type="file", accept="image/*", id="photo", name="photo")
+          label(for="photo") Choose a photo
+        .reported-form__group
+          label.reported-form__label Country:
+          input.reported-form__input(type="text", id="country", name="country", placeholder="Enter a country name")
+        .reported-form__group
+          label.reported-form__label(for="city") City:
+          input.reported-form__input(type="text", id="city", name="city", placeholder="Enter a city name")
+        .reported-form__group
+          label.reported-form__label(for="lastSeenDate") Last Seen Date:
+          input.reported-form__input(type="date", id="lastSeenDate", name="lastSeenDate")
+        .reported-form__group.full-width
+          label.reported-form__label(for="additionalDetails") Additional Details:
+          textarea.reported-form__input(id="additionalDetails", name="additionalDetails", placeholder="Enter any additional details. like physical, mental or medical conditions etc...", rows='6')
+        .reported-form__group
+          button.btn.btn--green(type="submit") Submit

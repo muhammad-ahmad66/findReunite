@@ -35,6 +35,13 @@ router.get(
   viewsController.getReportMissing,
 );
 
+// To render the form to update the foundPerson Date.
+// router.get(
+//   '/update-person',
+//   authController.protect,
+//   viewsController.getUpdatePerson,
+// );
+
 router.get(
   '/persons/:id',
   authController.isLoggedIn,

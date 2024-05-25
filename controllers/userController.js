@@ -111,7 +111,16 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 
 exports.getMe = catchAsync(async (req, res, next) => {
   req.params.id = req.user.id;
-  let query = User.findById(req.params.id).populate('associatedPersons');
+  let query = User.findById(req.params.id).populate([
+    {
+      path: 'associatedPersons',
+      select: 'name photo country city additionalDetails',
+    },
+    {
+      path: 'missingReportedPersons',
+      select: 'name photo additionalDetails location.country location.city',
+    },
+  ]);
   // if (popOptions) query = query.populate(popOptions);
   const doc = await query;
 

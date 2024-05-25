@@ -2,9 +2,11 @@ extends base
 
 mixin navItem(link, text, icon, active)
   li(class=`${active ? 'side-nav--active': ''}`)
-    a(href=`${link}`)
-      svg
-        use(xlink:href=`img/icons.svg#icon-${icon}`)
+    a(href=`${link}`, data-section=`${text.toLowerCase().replace(/\s+/g, '-')}`)
+      //- svg
+      //-   use(xlink:href=`img/icons.svg#icon-${icon}`)
+      //- | #{text}
+      i(class=`fa-solid fa-${icon}`)
       | #{text}
 
 block content
@@ -12,21 +14,21 @@ block content
     .user-view
       nav.user-view__menu
         ul.side-nav
-          +navItem('#', 'Settings', 'settings', true)
-          +navItem('#', 'My Reports', 'briefcase' )
-          +navItem('#', 'My reviews', 'star')
-          +navItem('#', 'Filhal kly ni', 'credit-card')
-        - if(user.role ==='admin')
+          +navItem('#', 'Profile Settings', 'gear', true)
+          +navItem('#', 'My Found Reports', 'user-check')
+          +navItem('#', 'My Missing Reports', 'users-viewfinder')
+          +navItem('#', 'Other Activities', 'list-check')
+        - if(user.role === 'admin')
           .admin-nav
             h5.admin-nav__heading Admin
             ul.side-nav
-              +navItem('#', 'Manage Persons', 'map')
-              +navItem('#', 'Manage Users', 'users')
-              +navItem('#', 'Manage reviews', 'star')
-              +navItem('#', 'Manage Bookings', 'briefcase')
+              +navItem('#', 'Manage Users', 'users-cog')
+              +navItem('#', 'Manage Found Persons', 'user-check')
+              +navItem('#', 'Manage Missing Persons', 'search')
+              +navItem('#', 'Other Settings', 'cog')
 
       .user-view__content
-        .user-view__form-container
+        #settings.user-view__form-container.active
           h2.heading-secondary.ma-bt-md Your account settings
           form.form.form-user-data
             .form__group
@@ -36,15 +38,12 @@ block content
               label.form__label(for='email') Email address
               input#email.form__input(type='email', value=`${user.email}`, required name="email")
             .form__group.form__photo-upload
-              //- img.form__user-photo(src=`/img/users/default.jpg`, alt='User photo')
               img.form__user-photo(src=`/img/users/${user.photo}`, alt=`${user.name} Photo`)
               input.form__upload(type="file", accept="image/*", id="photo", name="photo")
               label(for="photo") Choose new photo
-              //- a.btn-text(href='') Choose new photo
             .form__group.right
               button.btn.btn--small.btn--green Save settings
-        .line &nbsp;
-        .user-view__form-container
+          .line &nbsp;
           h2.heading-secondary.ma-bt-md Password change
           form.form.form-user-password
             .form__group
@@ -58,3 +57,64 @@ block content
               input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
             .form__group.right
               button.btn.btn--small.btn--green.btn--save-password Save password
+
+        #my-found-reports.user-view__form-container
+          h2.heading-secondary.ma-bt-md My Found Reports
+          .persons-container
+            each person in user.associatedPersons 
+              .person-card
+                img.person-card__photo(src=`/img/persons/${person.photo}`, alt=`${person.name}'s Photo`)
+                h3.person-card__name #{person.name}
+                p.person-card__location= `From: ${person.city}, ${person.country}`
+                p.person-card__description= person.additionalDetails
+                .person-card__btn-box 
+                  a.person-card__btn(href=`/update-person`, class="update-button" data-id=person._id)
+                    i.fa-solid.fa-user-pen  
+                    | Update
+                  a.person-card__btn(href=`/persons/${person._id}`)
+                    i.fa-solid.fa-trash  
+                    | Delete
+                a.person-card__btn-detail(href=`/persons/${person._id}`) Details
+
+        #my-missing-reports.user-view__form-container
+          h2.heading-secondary.ma-bt-md My Missing Reports
+          //-  user.missingReportedPersons
+          .persons-container
+            each person in user.missingReportedPersons 
+              .person-card
+                img.person-card__photo(src=`/img/missing-persons/${person.photo}`, alt=`${person.name}'s Photo`)
+                h3.person-card__name #{person.name}
+                p.person-card__location= `From: ${person.location.city}, ${person.location.country}`
+                p.person-card__description= person.additionalDetails
+                .person-card__btn-box 
+                  a.person-card__btn(href=`/persons/${person._id}`)
+                    i.fa-solid.fa-user-pen  
+                    | Update
+                  a.person-card__btn(href=`/persons/${person._id}`)
+                    i.fa-solid.fa-trash  
+                    | Delete
+                a.person-card__btn-detail(href=`/persons/${person._id}`) Details
+
+               
+        #other-activities.user-view__form-container
+          h2.heading-secondary.ma-bt-md Other Activities
+          p This is the Filhal kly ni section. Content for Filhal kly ni goes here.
+
+        // Admin sections
+        - if(user.role === 'admin')
+
+          #manage-users.user-view__form-container
+            h2.heading-secondary.ma-bt-md Manage Users
+            p This is the Manage Users section. Here you can manage users.
+
+          #manage-found-persons.user-view__form-container
+            h2.heading-secondary.ma-bt-md Manage Found Persons
+            p This is the Manage Persons section. Here you can manage persons.
+
+          #manage-missing-persons.user-view__form-container
+            h2.heading-secondary.ma-bt-md Manage Missing Persons
+            p This is the Manage Reviews section. Here you can manage reviews.
+
+          #other-settings.user-view__form-container
+            h2.heading-secondary.ma-bt-md Other Settings
+            p This is the Manage Bookings section. Here you can manage bookings.

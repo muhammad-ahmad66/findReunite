@@ -79,7 +79,7 @@ const userSchema = mongoose.Schema({
     // To store ids of reported missing persons
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Person',
+      ref: 'MissingPerson',
     },
   ],
 });

@@ -93,7 +93,7 @@ exports.checkForMatches = catchAsync(async (req, res, next) => {
 // Controller to create a missing person entry
 exports.createMissingPerson = catchAsync(async (req, res, next) => {
   // Assign the user ID to req.body.user
-  req.body.user = req.user._id;
+  // req.body.user = req.user._id;
 
   // Create the new missing person entry
   const newMissingPerson = await MissingPerson.create(req.body);
