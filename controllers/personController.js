@@ -145,6 +145,18 @@ exports.deletePerson = async (req, res) => {
   try {
     const deletedPerson = await Person.findByIdAndDelete(req.params.id);
 
+    if (!deletedPerson) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Person not found',
+      });
+    }
+
+    // Find the user associated with this person and remove the person's ID from their associatedPersons field
+    await User.findByIdAndUpdate(deletedPerson.user, {
+      $pull: { associatedPersons: req.params.id },
+    });
+
     res.status(204).json({
       status: 'success',
       data: null,

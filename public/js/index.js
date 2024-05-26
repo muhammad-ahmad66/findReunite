@@ -21,80 +21,6 @@ const searchForm = document.querySelector('.nav__search');
 const filterForm = document.querySelector('.nav__filter');
 
 // UPDATE PERSON DETAIL
-// if (updatePersonForm)
-//   updatePersonForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     const name = document.getElementById('name').value;
-//     const gender = document.getElementById('gender').value;
-//     const approxAge = document.getElementById('approxAge').value;
-//     const UniqueIdentifier = document.getElementById('UniqueIdentifier').value;
-//     const clothingDescription = document.getElementById(
-//       'clothingDescription',
-//     ).value;
-//     const HairColor = document.getElementById('HairColor').value;
-//     // const photo = document.getElementById('photo').files[0];
-//     const country = document.getElementById('country').value;
-//     const city = document.getElementById('city').value;
-//     const lastSeenDate = document.getElementById('lastSeenDate').value;
-//     const additionalDetails =
-//       document.getElementById('additionalDetails').value;
-
-//     updatePerson({
-//       name,
-//       gender,
-//       approxAge,
-//       UniqueIdentifier,
-//       clothingDescription,
-//       additionalDetails,
-//       HairColor,
-//       country,
-//       city,
-//       lastSeenDate,
-//     });
-//   });
-
-document.querySelectorAll('.update-button').forEach((button) => {
-  button.addEventListener('click', async (event) => {
-    const personId = event.target.getAttribute('data-id');
-    try {
-      // Fetch the update form
-      const response = await axios.get(`/update-person/${personId}`);
-      // Insert the update form into the container
-      document.getElementById('updateFormContainer').innerHTML = response.data;
-
-      // Add event listener to the form submit button
-      document
-        .getElementById('updateForm')
-        .addEventListener('submit', async (event) => {
-          event.preventDefault();
-          const updatedDetails = {
-            name: document.getElementById('name').value,
-            gender: document.getElementById('gender').value,
-            approxAge: document.getElementById('approxAge').value,
-            UniqueIdentifier: document.getElementById('UniqueIdentifier').value,
-            clothingDescription: document.getElementById('clothingDescription')
-              .value,
-            HairColor: document.getElementById('HairColor').value,
-            //  photo : document.getElementById('photo').files[0],
-            country: document.getElementById('country').value,
-            city: document.getElementById('city').value,
-            lastSeenDate: document.getElementById('lastSeenDate').value,
-            additionalDetails:
-              document.getElementById('additionalDetails').value,
-          };
-          try {
-            await axios.patch(`/api/persons/${personId}`, updatedDetails);
-            alert('Person updated successfully');
-            // Optionally, refresh the page or update the UI to reflect the changes
-          } catch (error) {
-            console.error('Error updating person:', error);
-          }
-        });
-    } catch (error) {
-      console.error('Error fetching update form:', error);
-    }
-  });
-});
 
 // Show the loader when the page starts loading
 document.addEventListener('DOMContentLoaded', () => {
@@ -286,15 +212,21 @@ if (filterForm)
     } else window.location.href = `http://127.0.0.1:800/search-person`;
   });
 
-// ! GO NEXT AND PREVIOUS PAGE FUNCTIONS
-// Retrieve the current page number from the URL
-let urlParams = new URLSearchParams(window.location.search);
-let page = parseInt(urlParams.get('page')) || 1;
+// // ! GO NEXT AND PREVIOUS PAGE FUNCTIONS
+// // Retrieve the current page number from the URL
+// let urlParams = new URLSearchParams(window.location.search);
+// let page = parseInt(urlParams.get('page')) || 1;
 
+//  ! USER ACCOUNT DASHBOARD.
 const navItems = document.querySelectorAll('.side-nav a');
 const contentContainers = document.querySelectorAll(
   '.user-view__form-container',
 );
+
+// For update form
+const updateFormContainer = document.getElementById('update-form-container');
+const foundReports = document.getElementById('my-found-reports');
+const updateBtn = document.querySelector('.update-button');
 
 navItems.forEach((item) => {
   item.addEventListener('click', (event) => {
@@ -308,9 +240,119 @@ navItems.forEach((item) => {
       container.classList.remove('active'),
     );
 
+    updateFormContainer.classList.remove('active');
+
     // Add active class to the clicked nav item
     const sectionId = event.target.getAttribute('data-section');
     document.getElementById(sectionId).classList.add('active');
+    const target = event.target;
     event.target.parentElement.classList.add('side-nav--active');
+
+    updateBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(sectionId).classList.remove('active');
+      // target.parentElement.classList.remove('side-nav--active');
+      updateFormContainer.classList.add('active');
+    });
+  });
+});
+
+// ! UPDATE A FOUND PERSON DETAILS
+import axios from 'axios';
+import { showAlert } from './alerts';
+
+// ? 1) GETTING SELECTED PERSON'S DETAIL
+let personId;
+document.querySelectorAll('.update-button').forEach((button) => {
+  button.addEventListener('click', async (event) => {
+    personId = event.target.closest('a').getAttribute('data-id');
+    console.log(personId);
+
+    try {
+      // Fetch the person's details using Axios
+      const response = await axios.get(
+        `http://127.0.0.1:800/api/v1/persons/${personId}`,
+      );
+
+      console.log(response);
+      const person = response.data.data.person;
+
+      // Populate the form fields with the person's details
+      document.getElementById('person-name').value = person.name;
+      document.getElementById('person-gender').value = person.gender;
+      document.getElementById('person-approxAge').value = person.approxAge;
+      document.getElementById('person-UniqueIdentifier').value =
+        person.UniqueIdentifier;
+      document.getElementById('person-clothingDescription').value =
+        person.clothingDescription;
+      document.getElementById('person-HairColor').value = person.HairColor;
+      document.getElementById('person-country').value = person.country;
+      document.getElementById('person-city').value = person.city;
+      document.getElementById('person-additionalDetails').value =
+        person.additionalDetails;
+
+      // Display the update form
+      // document.getElementById('update-form-container').style.display = 'block';
+    } catch (error) {
+      console.error('Error fetching person details:', error);
+    }
+  });
+});
+
+// ? 2) UPDATING WITH AJAX PATCH REQ TO API
+document
+  .querySelector('.update-person-form')
+  .addEventListener('submit', async (event) => {
+    event.preventDefault();
+    // const personId = document
+    //   .querySelector('.update-button[data-id]')
+    //   .getAttribute('data-id');
+    const updatedDetails = {
+      name: document.getElementById('person-name').value,
+      gender: document.getElementById('person-gender').value,
+      approxAge: document.getElementById('person-approxAge').value,
+      UniqueIdentifier: document.getElementById('person-UniqueIdentifier')
+        .value,
+      clothingDescription: document.getElementById('person-clothingDescription')
+        .value,
+      HairColor: document.getElementById('person-HairColor').value,
+      country: document.getElementById('person-country').value,
+      city: document.getElementById('person-city').value,
+      additionalDetails: document.getElementById('person-additionalDetails')
+        .value,
+    };
+
+    try {
+      // Update the person's details using Axios
+      await axios.patch(
+        `http://127.0.0.1:800/api/v1/persons/${personId}`,
+        updatedDetails,
+      );
+      showAlert('success', 'Person updated successfully');
+      location.assign('http://127.0.0.1:800/me');
+
+      // Optionally, refresh the page or update the UI to reflect the changes
+    } catch (error) {
+      console.error('Error updating person:', error);
+      showAlert('error', 'Error updating person');
+    }
+  });
+
+// ! DELETE A FOUND PERSON
+document.querySelectorAll('.delete-button').forEach((button) => {
+  button.addEventListener('click', async (event) => {
+    const personId = event.target.closest('a').getAttribute('data-id');
+    if (confirm('Are you sure you want to delete this person?')) {
+      try {
+        // Delete the person using Axios
+        await axios.delete(`http://127.0.0.1:800/api/v1/persons/${personId}`);
+        alert('Person deleted successfully');
+        // Remove the person's card from the UI
+        const personCard = event.target.closest('.person-card');
+        personCard.remove();
+      } catch (error) {
+        console.error('Error deleting person:', error);
+      }
+    }
   });
 });

@@ -28,7 +28,7 @@ block content
               +navItem('#', 'Other Settings', 'cog')
 
       .user-view__content
-        #settings.user-view__form-container.active
+        #profile-settings.user-view__form-container.active
           h2.heading-secondary.ma-bt-md Your account settings
           form.form.form-user-data
             .form__group
@@ -60,40 +60,100 @@ block content
 
         #my-found-reports.user-view__form-container
           h2.heading-secondary.ma-bt-md My Found Reports
-          .persons-container
-            each person in user.associatedPersons 
-              .person-card
-                img.person-card__photo(src=`/img/persons/${person.photo}`, alt=`${person.name}'s Photo`)
-                h3.person-card__name #{person.name}
-                p.person-card__location= `From: ${person.city}, ${person.country}`
-                p.person-card__description= person.additionalDetails
-                .person-card__btn-box 
-                  a.person-card__btn(href=`/update-person`, class="update-button" data-id=person._id)
-                    i.fa-solid.fa-user-pen  
-                    | Update
-                  a.person-card__btn(href=`/persons/${person._id}`)
-                    i.fa-solid.fa-trash  
-                    | Delete
-                a.person-card__btn-detail(href=`/persons/${person._id}`) Details
+          if user.associatedPersons && user.associatedPersons.length > 0
+            .persons-container
+              each person in user.associatedPersons 
+                .person-card
+                  img.person-card__photo(src=`/img/persons/${person.photo}`, alt=`${person.name}'s Photo`)
+                  h3.person-card__name #{person.name}
+                  p.person-card__location= `From: ${person.city}, ${person.country}`
+                  p.person-card__description= person.additionalDetails
+                  .person-card__btn-box 
+                    a.person-card__btn(href=`/update-person`, class="update-button" data-id=person._id)
+                      i.fa-solid.fa-user-pen  
+                      | Update
+                    a.person-card__btn(href="javascript:void(0);" class="delete-button" data-id=person._id)
+                      i.fa-solid.fa-trash  
+                      | Delete
+                  a.person-card__btn-detail(href=`/persons/${person._id}`) Details
+          else 
+            .persons-container__no-persons
+              p.persons-container__no-persons-text
+                | You have no found persons yet!
+              p.persons-container__no-persons-text  
+                | Please add a new Person here 
+                a.persons-container__no-persons-link(href="http://127.0.0.1:800/report-found-person", class="persons-container__link") Add New Person
+
+
+        .reported-form-container#update-form-container
+          form.reported-form.update-person-form(action="#", method="post")
+            .reported-form__group
+              label.reported-form__label(for="person-name") Full Name:
+              input.reported-form__input(type="text", id="person-name", name="name", placeholder="Enter Person's name")
+            .reported-form__group
+              label.reported-form__label Gender:
+              select.reported-form__input(id="person-gender", name="gender")
+                option(value="male") Male
+                option(value="female") Female
+                option(value="non-binary") non-binary
+            .reported-form__group
+              label.reported-form__label(for="person-approxAge") Approximate Age:
+              input.reported-form__input(type="number", id="person-approxAge", name="approxAge", placeholder="Enter approximate age")
+            .reported-form__group
+              label.reported-form__label(for="person-UniqueIdentifier") Unique Identifier:
+              input.reported-form__input(type="text", id="person-UniqueIdentifier", name="UniqueIdentifier", placeholder="Enter any unique identifier")
+            .reported-form__group.full-width
+              label.reported-form__label(for="person-clothingDescription") Clothing Description:
+              textarea.reported-form__input(type="text", id="person-clothingDescription", name="clothingDescription", placeholder="Enter him/her clothing description", rows='3')
+            .reported-form__group
+              label.reported-form__label(for="person-HairColor") Hair Color:
+              input.reported-form__input(type="text", id="person-HairColor", name="HairColor", placeholder="Enter hair color")
+            .reported-form__group
+              //- img.form__user-photo(src=`img/users/default.jpg`, alt=` Photo`)
+              //- input.form__upload(type="file", accept="image/*", id="photo", name="photo")
+              //- label(for="photo") Choose a photo
+            .reported-form__group
+              label.reported-form__label Country:
+              input.reported-form__input(type="text", id="person-country", name="country", placeholder="Enter a country name")
+            .reported-form__group
+              label.reported-form__label(for="person-city") City:
+              input.reported-form__input(type="text", id="person-city", name="city", placeholder="Enter a city name")
+            //- .reported-form__group
+            //-   label.reported-form__label(for="lastSeenDate") Last Seen Date:
+            //-   input.reported-form__input(type="date", id="lastSeenDate", name="lastSeenDate")
+            .reported-form__group.full-width
+              label.reported-form__label(for="person-additionalDetails") Additional Details:
+              textarea.reported-form__input(id="person-additionalDetails", name="additionalDetails", placeholder="Enter any additional details. like physical, mental or medical conditions etc...", rows='6')
+            .reported-form__group
+              button.btn.btn--green(type="submit") Submit
+
 
         #my-missing-reports.user-view__form-container
           h2.heading-secondary.ma-bt-md My Missing Reports
           //-  user.missingReportedPersons
-          .persons-container
-            each person in user.missingReportedPersons 
-              .person-card
-                img.person-card__photo(src=`/img/missing-persons/${person.photo}`, alt=`${person.name}'s Photo`)
-                h3.person-card__name #{person.name}
-                p.person-card__location= `From: ${person.location.city}, ${person.location.country}`
-                p.person-card__description= person.additionalDetails
-                .person-card__btn-box 
-                  a.person-card__btn(href=`/persons/${person._id}`)
-                    i.fa-solid.fa-user-pen  
-                    | Update
-                  a.person-card__btn(href=`/persons/${person._id}`)
-                    i.fa-solid.fa-trash  
-                    | Delete
-                a.person-card__btn-detail(href=`/persons/${person._id}`) Details
+          if user.missingReportedPersons && user.missingReportedPersons.length > 0
+            .persons-container
+              each person in user.missingReportedPersons 
+                .person-card
+                  img.person-card__photo(src=`/img/missing-persons/${person.photo}`, alt=`${person.name}'s Photo`)
+                  h3.person-card__name #{person.name}
+                  p.person-card__location= `From: ${person.location.city}, ${person.location.country}`
+                  p.person-card__description= person.additionalDetails
+                  .person-card__btn-box 
+                    a.person-card__btn(href=`/persons/${person._id}`)
+                      i.fa-solid.fa-user-pen  
+                      | Update
+                    a.person-card__btn(href=`/persons/${person._id}`)
+                      i.fa-solid.fa-trash  
+                      | Delete
+                  a.person-card__btn-detail(href=`/persons/${person._id}`) Details
+          else 
+            .persons-container__no-persons
+              p.persons-container__no-persons-text
+                | You have no found persons yet!
+              p.persons-container__no-persons-text  
+                | Please add a new Person here 
+                a.persons-container__no-persons-link(href="http://127.0.0.1:800/report-found-person", class="persons-container__link") Add New Person
 
                
         #other-activities.user-view__form-container

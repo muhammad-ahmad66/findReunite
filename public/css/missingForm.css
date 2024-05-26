@@ -115,3 +115,35 @@ button.btn.btn--green:hover {
   background-color: #28b485;
   cursor: pointer;
 }
+
+#update-form-container {
+  max-width: 50rem;
+  margin: 0 auto;
+  display: flex;
+  display: none;
+}
+/* .active {
+} */
+
+#update-form-container.active {
+  display: block;
+}
+
+.persons-container__no-persons p {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.persons-container__no-persons a:link,
+.persons-container__no-persons a:visited {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #28b485;
+  text-decoration: none;
+}
+
+.persons-container__no-persons a:hover,
+.persons-container__no-persons a:active {
+  text-decoration: underline;
+}
