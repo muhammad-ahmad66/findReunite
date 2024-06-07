@@ -19,21 +19,25 @@ html
     link(rel="stylesheet", href="/css/missingForm.css")
     link(rel="stylesheet", href="/css/base.css")
     link(rel="stylesheet", href="/css/account.css")
+    link(rel="stylesheet", href="/css/contact.css")
+    link(rel="stylesheet", href="/css/loader.css")
     link(rel="shortcut icon" href="/img/findReunite Icon Black.png" type="image/x-icon")
 
 
   body
-    // HEADER
-    //- For CSS classes we're using BEM Notation.
-    include _header
+    //- .loader
+      //- h1 loading....
+    #content
+      // HEADER
+      //- For CSS classes we're using BEM Notation.
+      include _header
 
-    // MAIN CONTENT
-    block content
-      h1 This is a placeholder heading
-    
-
-    // FOOTER
-    include _footer
+      // MAIN CONTENT
+      block content
+        h1 This is a placeholder heading
+      
+      // FOOTER
+      include _footer
 
     //- script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js")
     //- script(src="/js/login.js")

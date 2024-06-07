@@ -1,0 +1,63 @@
+extends base 
+
+block content 
+  main.main.main-contact-page
+    section.contact-header
+      h1 Contact Us
+      p We are here to assist you with any inquiries or concerns.
+      p Please reach out to us and we will get back to you as soon as possible.
+
+    section.contact-map
+      iframe(
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2482107039696!2d144.9560543153196!3d-37.8162189797517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xb8d02cce35f3bf1e!2sVictoria%20Harbour%20Promenade%2C%20Docklands%20VIC%203008%2C%20Australia!5e0!3m2!1sen!2sin!4v1606375885309!5m2!1sen!2sin",
+        width="600",
+        height="450",
+        frameborder="0",
+        style="border:0;",
+        allowfullscreen="",
+        aria-hidden="false",
+        tabindex="0")
+
+    section.contact-details
+      .contact-info
+        .address
+          a(href="https://maps.google.com/?q=123+Main+Street,+Anytown,+USA" target="_blank")
+            i.fa.fa-map-marker
+            span 123 Main Street, Anytown, USA
+        .phone
+          a(href="tel:+15551234567")
+            i.fa.fa-phone
+            span +1 (555) 123-4567
+        .whatsapp
+          a(href="https://wa.me/15559876543")
+            i.fa.fa-whatsapp
+            span +1 (555) 987-6543
+        .email
+          a(href="mailto:info@example.com")
+            i.fa.fa-envelope
+            span info@example.com
+        .social
+          a(href="https://facebook.com" target="_blank")
+            i.fa.fa-facebook
+          a(href="https://twitter.com" target="_blank")
+            i.fa.fa-twitter
+          a(href="https://instagram.com" target="_blank")
+            i.fa.fa-instagram
+          a(href="https://linkedin.com" target="_blank")
+            i.fa.fa-linkedin
+
+      .contact-form
+        form(action="#", method="post")
+          .form-group
+            label(for="name") Name:
+            input(type="text", id="name", name="name", placeholder="Enter your name")
+          .form-group
+            label(for="email") Email:
+            input(type="email", id="email", name="email", placeholder="Enter your email")
+          .form-group
+            label(for="subject") Subject:
+            input(type="text", id="subject", name="subject", placeholder="Enter the subject")
+          .form-group
+            label(for="message") Message:
+            textarea(id="message", name="message", rows="5", placeholder="Enter your message")
+          button.btn(type="submit") Submit

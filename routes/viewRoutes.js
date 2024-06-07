@@ -17,7 +17,6 @@ router.get('/', authController.isLoggedIn, viewsController.getOverview);
 router.get(
   `/search-person`,
   authController.protect,
-  authController.restrictTo('admin'),
   viewsController.getSearchPerson,
 );
 
@@ -43,6 +42,13 @@ router.get(
 // );
 
 router.get(
+  '/all-users',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getAllUsers,
+);
+
+router.get(
   '/persons/:id',
   authController.isLoggedIn,
   viewsController.getPersonDetail,
@@ -52,6 +58,7 @@ router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 
 // Static Pages
+router.get('/contact-us', viewsController.getContactUs);
 router.get('/about-group', viewsController.getAboutGroup);
 router.get('/acknowledge', viewsController.getAcknowledge);
 router.get('/privacy-policy', viewsController.getPrivacyPolicy);

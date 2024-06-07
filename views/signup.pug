@@ -2,7 +2,7 @@ extends base
 
 block content
   main.main
-    .login-form
+    .login-form#signup-form
       h2.heading-secondary.ma-bt-lg Create a new Account
       form.form.form--signup
         .form__group
@@ -22,9 +22,9 @@ block content
           input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
         .form__group.ma-bt-md
           label.form__label(for='country') Country Name
-          input#country.form__input(type='text', placeholder='Your Country Name', required)
+          input#country.form__input(type='text', placeholder='Your Country Name')
         .form__group.ma-bt-md
           label.form__label(for='city') City Name
-          input#city.form__input(type='text', placeholder='Your City Name', required)
+          input#city.form__input(type='text', placeholder='Your City Name')
         .form__group
-          button.btn.btn--green Sign up
+          button.btn.btn--green#signup-btn Sign up

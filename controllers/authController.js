@@ -48,7 +48,6 @@ exports.signup = catchAsync(async (req, res, next) => {
       country: req.body.country,
       city: req.body.city,
     },
-    // role: req.body.role,
   });
 
   const url = `${req.protocol}://${req.get('host')}/me`;
@@ -173,6 +172,37 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    return next();
+  }
+  return res.status(403).json({
+    status: 'fail',
+    message: 'You do not have permission to perform this action',
+  });
+};
+
+exports.makeAdmin = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'User not found',
+    });
+  }
+
+  user.role = 'admin';
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
 
 // exports.forgotPassword = catchAsync(async (req, res, next) => {
 //   // 1) Get user based on POSTed email

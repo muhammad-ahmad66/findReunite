@@ -54,7 +54,6 @@ exports.getReportFound = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.getReportMissing = (req, res) => {
   res.status(200).render('missingPersonForm', {
     title: 'Report Missing Person',
@@ -74,7 +73,7 @@ exports.getPersonDetail = catchAsync(async (req, res, next) => {
   //* 2) BUILD TEMPLATE
   //* 3) RENDER THAT TEMPLATE USING THE DATA FROM STEP#01
   res.status(200).render('person', {
-    title: 'Muhammad Ahmad',
+    title: person.name,
     person,
   });
 });
@@ -88,6 +87,16 @@ exports.getLoginForm = catchAsync(async (req, res, next) => {
 exports.getSignupForm = catchAsync(async (req, res, next) => {
   res.status(200).render('signup', {
     title: 'Sign up to your account',
+  });
+});
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find();
+
+  // SEND RESPONSE
+  res.status(200).render('all-users', {
+    title: 'All Users',
+    users,
   });
 });
 
@@ -138,6 +147,12 @@ exports.getPrivacyPolicy = (req, res) => {
 exports.getTerms = (req, res) => {
   res.status(200).render('terms', {
     title: 'Terms of Service',
+  });
+};
+
+exports.getContactUs = (req, res) => {
+  res.status(200).render('contact', {
+    title: 'Contact Us',
   });
 };
 

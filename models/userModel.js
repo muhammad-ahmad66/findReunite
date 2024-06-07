@@ -46,14 +46,13 @@ const userSchema = mongoose.Schema({
       },
     ],
   },
+
   location: {
     city: {
       type: String,
-      default: 'unknown',
     },
     country: {
       type: String,
-      default: 'unknown',
     },
   },
   role: {
