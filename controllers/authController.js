@@ -204,6 +204,37 @@ exports.makeAdmin = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.assignRole = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'User not found',
+    });
+  }
+
+  const { role } = req.body;
+
+  // Ensure the role is either 'admin' or 'user'
+  if (role !== 'admin' && role !== 'user') {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Invalid role. Role must be either "admin" or "user".',
+    });
+  }
+
+  user.role = role;
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
+
 // exports.forgotPassword = catchAsync(async (req, res, next) => {
 //   // 1) Get user based on POSTed email
 //   const user = await User.findOne({ email: req.body.email });

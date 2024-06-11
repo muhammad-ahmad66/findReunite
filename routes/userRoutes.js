@@ -7,16 +7,30 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router
-  .route('/makeAdmin/:id')
+  .route('/assignRole/:id')
   .patch(
     authController.protect,
     authController.isAdmin,
-    authController.makeAdmin,
+    authController.assignRole,
   );
+// router
+//   .route('/makeAdmin/:id')
+//   .patch(
+//     authController.protect,
+//     authController.isAdmin,
+//     authController.makeAdmin,
+//   );
 
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
+
+router.delete(
+  '/deleteUser/:id',
+  authController.protect,
+  authController.restrictTo('admin'),
+  userController.deleteUser,
+);
 
 router.patch(
   '/updateMyPassword',
@@ -41,11 +55,6 @@ router
 router
   .route('/:id')
   .get(userController.getUser)
-  .patch(userController.updateUser)
-  .delete(
-    authController.protect,
-    authController.restrictTo('admin'),
-    userController.deleteUser,
-  );
+  .patch(userController.updateUser);
 
 module.exports = router;

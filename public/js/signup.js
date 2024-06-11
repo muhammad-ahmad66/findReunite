@@ -1,21 +1,23 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
 
-const signupForm = document.getElementById('signup-btn');
+const signupForm = document.getElementById('signup-form');
+
+let formContent;
+
+if (signupForm) formContent = signupForm.innerHTML; // Save the original form content
+
 function showPreloader() {
-  const preloader = document.createElement('div');
-  preloader.id = 'preloader';
-  preloader.innerHTML = '<div class="loader"></div>';
-  signupForm.innerHTML = '';
-  signupForm.appendChild(preloader);
+  const formHeight = signupForm.offsetHeight; // Calculate the height of the signup form
+
+  signupForm.innerHTML = `<div id="preloader" class="loader"></div>`;
+  signupForm.classList.add('preloader-box');
+  signupForm.style.height = `${formHeight}px`; // Set the height of the form to the height of the loader
 }
 
 function hidePreloader() {
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    preloader.remove();
-    signupForm.innerHTML = 'Sign Up';
-  }
+  // signupForm.innerHTML = formContent; // Restore the original form content
+  signupForm.classList.remove('preloader-box');
 }
 
 export const signup = async (
@@ -43,17 +45,14 @@ export const signup = async (
       },
     });
 
-    // from our api
-    // if (res.data.status === 'success') {
-    // alert('Logged in successfully');
-    hidePreloader();
-    showAlert('success', 'Sig up successfully!');
+    showAlert('success', 'Sign up successfully!');
     window.setTimeout(() => {
+      hidePreloader();
       location.assign('/');
-    }, 1500);
-    // }
+    }, 500);
     console.log(result);
   } catch (err) {
+    signupForm.innerHTML = formContent;
     hidePreloader();
     showAlert('error', err.response.data.message);
   }

@@ -1,17 +1,36 @@
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: fit-content;
-  font-weight: normal;
-  font-family: inherit;
-  font-size: 15px; /* Adjusted font size */
-  clip-path: inset(0 1ch 0 0); /* Adjusted inset for smaller font size */
-  animation: l4 1s steps(11) infinite; /* Adjust steps to match the number of characters */
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #0000;
+  border-right-color: #55c57a;
+  position: relative;
+  animation: l24 1s infinite linear;
 }
-.loader:before {
-  content: 'Loading...';
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: inherit;
+  animation: inherit;
+  animation-duration: 2s;
 }
-@keyframes l4 {
-  to {
-    clip-path: inset(0 -6ch 0 0); /* Adjusted to fit the text length */
+.loader:after {
+  animation-duration: 4s;
+}
+@keyframes l24 {
+  100% {
+    transform: rotate(1turn);
   }
+}
+
+.preloader-box {
+  /* min-height:; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -162,9 +162,21 @@ exports.updateUser = (req, res) => {
   });
 };
 
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined.',
+exports.deleteUser = async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'User not found',
+    });
+  }
+
+  user.active = false;
+  await user.save({ validateBeforeSave: false });
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 };

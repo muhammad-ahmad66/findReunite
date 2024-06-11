@@ -410,3 +410,36 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 });
+
+import { roleManagement, deleteUser } from './userManagement';
+
+const adminBtn = document.getElementById('make-admin-btn');
+const userBtn = document.getElementById('make-user-btn');
+const deleteUserButtons = document.querySelectorAll('#delete-user-btn');
+
+if (deleteUserButtons) {
+  deleteUserButtons.forEach((button) =>
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      const userId = this.getAttribute('data-user-id');
+
+      console.log(userId);
+      deleteUser(userId);
+    }),
+  );
+}
+
+if (adminBtn)
+  adminBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const userId = this.getAttribute('data-user-id');
+
+    roleManagement('admin', userId);
+  });
+
+if (userBtn)
+  userBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const userId = this.getAttribute('data-user-id');
+    roleManagement('user', userId);
+  });

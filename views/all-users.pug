@@ -12,10 +12,16 @@ block content
             h3.user-card__name #{user.name}
             p.user-card__location= `From: ${user.location.city}, ${user.location.country}`
             .user-card__btn-box 
-              a.user-card__btn(href=`/users/${user._id}`)
-                i.fa-solid.fa-user-pen  
-                | Make Admin
-              a.user-card__btn(href=`/persons/${user._id}`)
+              if user.role !== 'admin'
+                a.user-card__btn(id="make-admin-btn" data-user-role=`admin` data-user-id=`${user._id}` href='#')
+                  i.fa-solid.fa-user-pen  
+                  | Make Admin
+              else 
+                a.user-card__btn(id="make-user-btn" data-user-role=`user` data-user-id=`${user._id}` href=`#`)
+                  i.fa-solid.fa-user-pen  
+                  | Make User
+               
+              a.user-card__btn(id="delete-user-btn" data-user-id=`${user._id}` href=`#`)
                 i.fa-solid.fa-trash  
                 | Delete
             //- a.user-card__btn-detail(href=`/api/v1/users/${user._id}`) Details
