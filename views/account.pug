@@ -161,7 +161,8 @@ block content
           p This is the Filhal kly ni section. Content for Filhal kly ni goes here.
 
         // Admin sections
-        - if(user.role === 'admin')
+        //- ! For owner it's not working.
+        if user.role === 'owner' || user.role === 'admin' || user.role === 'Owner' || user.role === 'OWNER'
 
           #manage-users.user-view__form-container
             h2.heading-secondary.ma-bt-md Manage Users

@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const mailgunTransport = require('nodemailer-mailgun-transport');
 const pug = require('pug');
 const { htmlToText } = require('html-to-text');
 
@@ -7,13 +8,20 @@ module.exports = class Email {
     this.to = user.email;
     this.firstName = user.name.split(' ')[0];
     this.url = url;
-    this.from = `Muhammad Ahmad <${process.env.EMAIL_FROM}>`;
+    this.from = `Your Name <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
-    // FOR PRODUCTION
     if (process.env.NODE_ENV === 'production') {
-      return 1;
+      // Use Mailgun for production
+      return nodemailer.createTransport(
+        mailgunTransport({
+          auth: {
+            api_key: process.env.MAILGUN_API_KEY,
+            domain: process.env.MAILGUN_DOMAIN,
+          },
+        }),
+      );
     }
 
     // FOR DEVELOPMENT
@@ -50,8 +58,8 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    // It'll call the send method with it's own template and the subject. which makes it very easy to send different emails for different situations.
-    await this.send('welcome', 'Welcome to the findReunite Family!');
+    // It'll call the send method with its own template and the subject. which makes it very easy to send different emails for different situations.
+    await this.send('welcome', 'Welcome to the FindReunite Family!');
   }
 
   async matchNotification() {

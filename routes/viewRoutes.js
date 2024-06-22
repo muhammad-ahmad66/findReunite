@@ -44,7 +44,7 @@ router.get(
 router.get(
   '/all-users',
   authController.protect,
-  authController.restrictTo('admin'),
+  authController.restrictTo('admin', 'owner'),
   viewsController.getAllUsers,
 );
 

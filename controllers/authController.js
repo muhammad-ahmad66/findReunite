@@ -217,7 +217,7 @@ exports.assignRole = catchAsync(async (req, res, next) => {
   const { role } = req.body;
 
   // Ensure the role is either 'admin' or 'user'
-  if (role !== 'admin' && role !== 'user') {
+  if (role !== 'admin' && role !== 'user' && role !== 'owner') {
     return res.status(400).json({
       status: 'fail',
       message: 'Invalid role. Role must be either "admin" or "user".',

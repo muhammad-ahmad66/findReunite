@@ -15,23 +15,28 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
 
   let filter = {};
 
-  // if (req.params.name) {
-  //   const regex = new RegExp(req.params.name, 'i');
-  //   filter = {
-  //     $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
-  //   };
-  // }
+  // Initialize APIFeatures instance without pagination to get the total count
+  const featuresWithoutPagination = new APIFeatures(
+    Person.find(filter),
+    req.query,
+  )
+    .filter()
+    .sort()
+    .limitFields();
 
-  const features = new APIFeatures(Person.find(filter), req.query)
+  // Execute query to get total persons count
+  const totalPersons = await featuresWithoutPagination.query.countDocuments();
+  console.log(totalPersons);
+
+  // Initialize APIFeatures instance with pagination
+  const featuresWithPagination = new APIFeatures(Person.find(filter), req.query)
     .filter()
     .sort()
     .limitFields()
     .paginate();
-  // const doc = await features.query.explain();
 
-  // EXECUTE QUERY
-  const persons = await features.query;
-  const totalPerson = persons.length;
+  // Execute query to get paginated results
+  const persons = await featuresWithPagination.query;
 
   const page = req.query.page ? parseInt(req.query.page, 10) : 1;
 
@@ -44,6 +49,7 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
     title: 'Search-Person',
     query: req.query,
     persons,
+    totalResults: totalPersons,
     page,
   });
 });

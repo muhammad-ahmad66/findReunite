@@ -148,7 +148,7 @@ block content
             //- |             
             a.btn.btn--green.btn--small(href=`/persons/${person._id}`) Details
     .btn-container
-      - const totalPages = Math.ceil(persons.length / 8);
+      - const totalPages = Math.ceil(totalResults / 8);
       - const firstPage = 1;
       - const lastPage = totalPages;
 
