@@ -6,7 +6,7 @@ const APIFeatures = require('./../utils/apiFeature');
 
 exports.getOverview = (req, res) => {
   res.status(200).render('overview', {
-    title: 'All Persons',
+    title: 'Home Page',
   });
 };
 
