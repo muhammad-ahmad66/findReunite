@@ -1,28 +1,25 @@
 doctype html
 html
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    //- meta(http-equiv="Content-Security-Policy" content="script-src 'self' 'cdnjs.cloudflare.com';")
+    block head
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      //- meta(http-equiv="Content-Security-Policy" content="script-src 'self' 'cdnjs.cloudflare.com';")
 
-    script(src='https://unpkg.com/@phosphor-icons/web')
+      script(src='https://unpkg.com/@phosphor-icons/web')
 
-    title FindReunite | #{title}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    //- <!--=============== REMIXICONS ===============-->
-    link(href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css",
-      rel="stylesheet")
-  
-    link(rel="stylesheet", href="/css/acknowledge.css")
-    link(rel="stylesheet", href="/css/about-group.css")
-    link(rel="stylesheet", href="/css/foundForm.css")
-    link(rel="stylesheet", href="/css/missingForm.css")
-    link(rel="stylesheet", href="/css/base.css")
-    link(rel="stylesheet", href="/css/account.css")
-    link(rel="stylesheet", href="/css/contact.css")
-    link(rel="stylesheet", href="/css/loader.css")
-    link(rel="shortcut icon" href="/img/findReunite Icon Black.png" type="image/x-icon")
-
+      title FindReunite | #{title}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      //- <!--=============== REMIXICONS ===============-->
+      link(href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css",
+        rel="stylesheet")
+    
+      link(rel="stylesheet", href="/css/foundForm.css")
+      link(rel="stylesheet", href="/css/missingForm.css")
+      link(rel="stylesheet", href="/css/base.css")
+      link(rel="stylesheet", href="/css/account.css")
+      link(rel="stylesheet", href="/css/loader.css")
+      link(rel="shortcut icon" href="/img/findReunite Icon Black.png" type="image/x-icon")
 
   body
     //- .loader

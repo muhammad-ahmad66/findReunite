@@ -22,31 +22,7 @@ block content
           a.btn.btn--white.btn--small(href='/report-found-person') Someone found
       |         
       .section-hero__right-column
-    // ABOUT SECTION
-    //
-      <section class='section-about'>
-      <div class="section-about__left-column">
-      <h2>About Us</h2>
-      <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-      repudiandae.
-      </p>
-      <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-      repudiandae.
-      </p>
-      <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-      repudiandae.
-      </p>
-      <div class="section-hero__buttons">
-      <a href="#" class="btn btn--green btn--small">Learn More ↘</a>
-      </div>
-      </div>
-      <div class="section-about__right-column">
-      <img src="img/about-image.jpg" alt="About image">
-      </div>
-      </section>
+
     section.section-about
       div
         h2#heading.heading-secondary.text-center
@@ -85,6 +61,39 @@ block content
               <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
               <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
     // ? SECTION FEATURES
+    section.section#section--1.feature-section
+      .feature-section__title
+        h2.feature-section__description Features
+        h3.feature-section__header
+          | Everything you need in a modern missing persons platform and more.
+      .features
+        img.features__img.lazy-img(src='img/digital-lazy.jpg' data-src='img/digital.jpg' alt='Computer')
+        .features__feature
+          .features__icon
+            svg
+              use(xlink:href='img/icons.svg#icon-monitor')
+          h5.features__header Comprehensive Search Filters
+          p
+            | FindReunite offers advanced search and filter options to help you quickly find missing persons. Utilize multiple filters such as age, gender, location, and last seen date to narrow down your search efficiently.
+        .features__feature
+          .features__icon
+            svg
+              use(xlink:href='img/icons.svg#icon-trending-up')
+          h5.features__header Stay Informed Effortlessly
+          p
+            | Receive instant email notifications whenever a newly reported missing person matches any found person in our database. This automated service ensures you are promptly alerted, enhancing the chances of reuniting loved ones quickly and effectively.
+        img.features__img.lazy-img(src='img/grow-lazy.jpg' data-src='img/grow.jpg' alt='Plant')
+        img.features__img.lazy-img(src='img/card-lazy.jpg' data-src='img/card.jpg' alt='Credit card')
+        .features__feature
+          .features__icon
+            svg
+              use(xlink:href='img/icons.svg#icon-credit-card')
+          h5.features__header Advanced Image Search
+          p
+            | Easily search for missing persons using our cutting-edge image recognition technology. Our system compresses and processes images efficiently, allowing for quick and accurate matches, making your search faster and more effective.
+
+
+
     section.section-features
       .row
         .col-1-of-4
