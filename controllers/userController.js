@@ -180,3 +180,45 @@ exports.deleteUser = async (req, res) => {
     data: null,
   });
 };
+
+// ! To get User from selected year
+
+exports.getStatisticsByYear = catchAsync(async (req, res, next) => {
+  const year = req.params.year;
+
+  // Implement your logic to fetch statistics for the specified year
+  const statistics = await User.aggregate([
+    {
+      $match: {
+        // Add any conditions you need here
+        createdAt: {
+          $gte: new Date(`${year}-01-01`),
+          $lt: new Date(`${year}-12-31T23:59:59.999Z`),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          $month: '$createdAt',
+        },
+        count: {
+          $sum: 1,
+        },
+      },
+    },
+  ]);
+
+  // Handle case where no data is found
+  if (!statistics || statistics.length === 0) {
+    return next(new AppError(`No statistics found for year ${year}`, 404));
+  }
+
+  // Format the response as needed
+  res.status(200).json({
+    status: 'success',
+    data: {
+      statistics,
+    },
+  });
+});

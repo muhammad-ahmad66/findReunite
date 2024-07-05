@@ -1,0 +1,19 @@
+extends base 
+
+block append head 
+  script(src='https://cdn.jsdelivr.net/npm/chart.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js')
+  link(rel="stylesheet", href="/css/statistics.css")
+
+block content 
+  #stat-content
+    h1 Company Name
+    h2 Country Distribution of Persons
+    div(style='width: 100%; margin: auto')
+      canvas#countryBarChart
+    button#download-btn
+      i.ri-file-download-fill
+      | &nbsp; Download PDF
+  //- script(src='chart.js')
+  //- script(src='pdf.js')

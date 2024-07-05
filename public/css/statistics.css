@@ -1,0 +1,35 @@
+#stat-content {
+  text-align: center;
+  margin: 60px 20px 20px;
+}
+
+#stat-content h1 {
+  color: #1dcb6e;
+  font-size: 30px;
+}
+
+#stat-content h2 {
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+#download-btn {
+  flex-grow: 1;
+  background-color: #1dcb6e; /* Replace with your primary color */
+  color: white;
+  padding: 15px 30px;
+  margin: 50px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  width: 250px;
+}
+
+#download-btn:hover {
+  background-color: #20bf6b; /* Replace with a darker shade of your primary color */
+}
+
+/* ------- */

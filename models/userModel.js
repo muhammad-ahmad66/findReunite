@@ -65,6 +65,10 @@ const userSchema = mongoose.Schema({
     default: true,
     select: false,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
   passwordChangedAt: Date,
 
   associatedPersons: [
@@ -93,6 +97,12 @@ userSchema.pre('save', async function (next) {
 
     // Delete Confirm Password
     this.passwordConfirm = undefined;
+
+    // Set createdAt if it's not already set
+    if (!this.createdAt) {
+      this.createdAt = Date.now();
+    }
+
     next();
   } catch (err) {
     console.log(err);

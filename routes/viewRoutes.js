@@ -42,6 +42,20 @@ router.get(
 // );
 
 router.get(
+  '/missing-person-reports',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getMissingPersonReports,
+);
+
+router.get(
+  '/found-person-reports',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getFoundPersonReports,
+);
+
+router.get(
   '/all-users',
   authController.protect,
   authController.restrictTo('admin', 'owner'),

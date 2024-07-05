@@ -29,9 +29,12 @@ export const login = async (email, password) => {
     // }
     console.log(result);
   } catch (err) {
+    hidePreloader(loginForm, formContent);
     showAlert('error', err.response.data.message);
     signupForm.innerHTML = formContent;
-    hidePreloader(loginForm, formContent);
+    window.setTimeout(() => {
+      location.assign('/');
+    }, 500);
   }
 };
 

@@ -21,6 +21,8 @@ router
 //     authController.makeAdmin,
 //   );
 
+router.get('/statistics/:year', userController.getStatisticsByYear);
+
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);

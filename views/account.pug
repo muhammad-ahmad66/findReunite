@@ -25,7 +25,7 @@ block content
               +navItem('#', 'Manage Users', 'users-cog')
               +navItem('#', 'Manage Found Persons', 'user-check')
               +navItem('#', 'Manage Missing Persons', 'search')
-              +navItem('#', 'Other Settings', 'cog')
+              +navItem('#', 'Analytics Dashboard', 'cog')
 
       .user-view__content
         #profile-settings.user-view__form-container.active
@@ -166,8 +166,11 @@ block content
 
           #manage-users.user-view__form-container
             h2.heading-secondary.ma-bt-md Manage Users
-            p This is the Manage Users section. Here you can manage users.
-            a.btn.btn--green.btn--small(href="/all-users") Get All Users
+            //- p This is the Manage Users section. Here you can manage users.
+            br
+            a.custom-btn(href='/all-users')
+              i.ri-gallery-view
+              | &nbsp; &nbsp; Get all Registered Users
 
 
           #manage-found-persons.user-view__form-container
@@ -178,6 +181,15 @@ block content
             h2.heading-secondary.ma-bt-md Manage Missing Persons
             p This is the Manage Reviews section. Here you can manage reviews.
 
-          #other-settings.user-view__form-container
-            h2.heading-secondary.ma-bt-md Other Settings
-            p This is the Manage Bookings section. Here you can manage bookings.
+          #analytics-dashboard.user-view__form-container
+            h2.heading-secondary.ma-bt-md Statistics
+            .button-container
+              a.custom-btn 
+                i.ri-list-check 
+                | &nbsp; &nbsp; User Registration Count
+              a#btn-missing-report.custom-btn(href='/missing-person-reports')
+                i.ri-bar-chart-line
+                | &nbsp; &nbsp; Missing Persons Location Report
+              a.custom-btn(href='/found-person-reports')
+                i.ri-bar-chart-line
+                | &nbsp; &nbsp; Found Persons Location Report

@@ -213,3 +213,35 @@
   background-color: #1dcb6e;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* Statistics Buttons */
+
+.button-container {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.custom-btn {
+  text-decoration: none;
+  flex-grow: 1;
+  background-color: #1dcb6e; /* Replace with your primary color */
+  color: white;
+  padding: 15px 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  width: 250px;
+}
+
+.custom-btn:hover {
+  background-color: #20bf6b; /* Replace with a darker shade of your primary color */
+}

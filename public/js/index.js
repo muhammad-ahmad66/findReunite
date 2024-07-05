@@ -432,3 +432,48 @@ if (imgTargets.length > 0) {
 
   imgTargets.forEach((img) => imgObserver.observe(img));
 }
+
+// ! Create a CHART REPORT
+import { fetchDataAndCreateChart } from './fetchDataAndCreateChart';
+import { generatePDF } from './generatePdf';
+
+const personCanvasEl = document.getElementById('countryBarChart');
+const missingCanvasEl = document.getElementById('missingPersonsByCountryChart');
+let apiUrl;
+let chartLabel;
+if (personCanvasEl) {
+  apiUrl = 'http://127.0.0.1:800/api/v1/persons';
+  chartLabel = 'Found Persons';
+  fetchDataAndCreateChart(apiUrl, personCanvasEl, chartLabel);
+}
+
+if (missingCanvasEl) {
+  apiUrl = 'http://127.0.0.1:800/api/v1/missing-persons';
+  chartLabel = 'Missing Persons';
+  fetchDataAndCreateChart(apiUrl, missingCanvasEl, chartLabel);
+}
+
+// ! GENERATE PDF FILE AND DOWNLOAD
+const downloadBtn = document.getElementById('download-btn');
+
+if (downloadBtn && personCanvasEl)
+  downloadBtn.addEventListener('click', () => {
+    // Example usage: Call generatePDF with specific parameters
+    generatePDF(
+      'countryBarChart',
+      'findReunite',
+      'Country Distribution of Reported Found Persons',
+      'Reported_Found_Persons.pdf',
+    );
+  });
+
+if (downloadBtn && missingCanvasEl)
+  downloadBtn.addEventListener('click', () => {
+    // Example usage: Call generatePDF with specific parameters
+    generatePDF(
+      'missingPersonsByCountryChart',
+      'findReunite',
+      'Country Distribution of Reported Missing Persons',
+      'Reported_Missing_Persons.pdf',
+    );
+  });

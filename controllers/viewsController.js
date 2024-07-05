@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const Person = require('../models/personModel');
+const MissingPerson = require('../models/missingPersonModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const APIFeatures = require('./../utils/apiFeature');
@@ -106,6 +107,23 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
+// !To get Missing Persons Reports
+exports.getMissingPersonReports = catchAsync(async (req, res, next) => {
+  const Persons = await MissingPerson.find();
+  res.status(200).render('missing-persons-reports', {
+    title: 'Missing Persons Reports',
+    Persons,
+  });
+});
+
+exports.getFoundPersonReports = catchAsync(async (req, res, next) => {
+  const Persons = await Person.find();
+  res.status(200).render('found-persons-reports', {
+    title: 'Found Persons Reports',
+    Persons,
+  });
+});
+
 exports.getAccount = async (req, res) => {
   req.params.id = req.user.id;
   let query = User.findById(req.params.id).populate([
@@ -162,7 +180,7 @@ exports.getContactUs = (req, res) => {
   });
 };
 
-const MissingPerson = require('../models/missingPersonModel');
+// const MissingPerson = require('../models/missingPersonModel');
 const FoundPerson = require('../models/personModel');
 // const catchAsync = require('../utils/catchAsync');
 const checkSimilarity = require('../utils/checkSimilarity');

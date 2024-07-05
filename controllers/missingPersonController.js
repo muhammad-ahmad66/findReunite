@@ -112,4 +112,15 @@ exports.createMissingPerson = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllMissingPersons = catchAsync(async (req, res, next) => {});
+exports.getAllMissingPersons = catchAsync(async (req, res, next) => {
+  // Fetch all missing person entries
+  const missingPersons = await MissingPerson.find();
+  // Send the response with the missing person entries
+  res.status(200).json({
+    status: 'success',
+    results: missingPersons.length,
+    data: {
+      missingPersons,
+    },
+  });
+});
