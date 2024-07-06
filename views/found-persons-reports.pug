@@ -10,8 +10,9 @@ block content
   #stat-content
     h1 Company Name
     h2 Country Distribution of Persons
+    button.btn-temp Click me
     div(style='width: 100%; margin: auto')
-      canvas#countryBarChart
+      canvas#countryBarChart(data-initialized="false")
     button#download-btn
       i.ri-file-download-fill
       | &nbsp; Download PDF

@@ -21,7 +21,12 @@ router
 //     authController.makeAdmin,
 //   );
 
-router.get('/statistics/:year', userController.getStatisticsByYear);
+router.get(
+  '/statistics/:year',
+  // authController.protect,
+  // authController.restrictTo('admin'),
+  userController.getStatisticsByYear,
+);
 
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);

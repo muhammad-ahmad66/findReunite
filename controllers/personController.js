@@ -169,3 +169,35 @@ exports.deletePerson = async (req, res) => {
     });
   }
 };
+
+exports.personByName = catchAsync(async (req, res, next) => {
+  const name = req.params.name.trim();
+
+  // Build a query to find a person by name
+  const query = {
+    name: { $regex: name, $options: 'i' },
+  };
+
+  // Find the persons matching the query
+  const persons = await Person.find(query);
+
+  if (!persons || persons.length === 0) {
+    // Handle case where no persons are found
+    return res.status(200).json({
+      status: 'success',
+      result: 0,
+      data: {
+        persons: [],
+      },
+    });
+  }
+
+  // Persons found, respond with the data
+  res.status(200).json({
+    status: 'success',
+    result: persons.length,
+    data: {
+      persons,
+    },
+  });
+});

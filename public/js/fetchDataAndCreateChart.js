@@ -4,6 +4,16 @@ export const fetchDataAndCreateChart = function (
   canvasElement,
   chartLabel,
 ) {
+  // Check if the canvas element has already been initialized
+  if (canvasElement.dataset.initialized === 'true') {
+    console.log('Chart already initialized for:', canvasElement.id);
+    return; // Exit early if already initialized
+  }
+
+  // Set initialized flag to true to prevent re-initialization
+  canvasElement.dataset.initialized = 'true';
+
+  // Fetch data from the API
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -12,13 +22,11 @@ export const fetchDataAndCreateChart = function (
       return response.json();
     })
     .then((data) => {
-      // Determine how to access missingPersons based on API response structure
+      // Extract missing persons data
       const missingPersons = extractMissingPersons(data);
 
       // Count missing persons by country
       const countryCounts = countPersonsByCountry(missingPersons);
-
-      console.log(countryCounts);
 
       // Extract labels (countries) and data (counts) for the chart
       const labels = Object.keys(countryCounts);
@@ -27,7 +35,7 @@ export const fetchDataAndCreateChart = function (
       // Get the canvas context
       const ctx = canvasElement.getContext('2d');
 
-      // Create the chart with dynamic label
+      // Create the chart
       createChart(ctx, labels, dataCounts, chartLabel);
     })
     .catch((error) => {
@@ -55,16 +63,10 @@ function countPersonsByCountry(missingPersons) {
 
   missingPersons.forEach((person) => {
     // Ensure person.location exists and has a country property
-    if (person.location && person.location.country) {
-      const country = person.location.country;
-      countryCounts[country] = (countryCounts[country] || 0) + 1;
-    } else {
-      const country = person.country;
-      countryCounts[country] = (countryCounts[country] || 0) + 1;
-
-      // Handle cases where location or country data is missing or inconsistent
-    }
+    const country = person.location?.country || person.country;
+    countryCounts[country] = (countryCounts[country] || 0) + 1;
   });
+
   console.log(countryCounts);
   return countryCounts;
 }
@@ -77,7 +79,7 @@ function createChart(ctx, labels, dataCounts, chartLabel) {
       labels: labels,
       datasets: [
         {
-          label: chartLabel, // Use dynamic label here
+          label: chartLabel,
           data: dataCounts,
           backgroundColor: 'rgba(54, 162, 235, 0.6)',
           borderColor: 'rgba(54, 162, 235, 1)',

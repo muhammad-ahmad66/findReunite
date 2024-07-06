@@ -27,4 +27,6 @@ router
     personController.deletePerson,
   );
 
+router.get('/search/:name', personController.personByName);
+
 module.exports = router;

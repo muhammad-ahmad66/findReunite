@@ -24,12 +24,12 @@ block content
     //-     |           
     //-     input.nav__search-input(type='text', placeholder='Search Person Name')    
     .search-row
-      form.nav__search
-          button.nav__search-btn
-            i.ph.ph-magnifying-glass
-          |           
-          input.nav__search-input(type='text', placeholder='Search Person Name', id="search-person-name")
-          button.btn-search#btn-search(type="submit") Search
+      form.nav__search#searchForm(action="/api/v1/persons/search", method="GET")
+        button.nav__search-btn(type="submit")
+          i.ph.ph-magnifying-glass
+        input.nav__search-input(type="text", placeholder="Search Person Name", id="search-person-name" name="name")
+        button.btn-search#btn-search(type="submit") Search
+
       form.nav__filter
         select.nav__search-select(name='sort', id="sort-by")
           option(value='') Sort by
@@ -83,9 +83,9 @@ block content
       p.paragraph.paragraph-query-info Displaying results for the Gender 
        b= `${query.gender[0].toUpperCase()}${query.gender.slice(1)}`
 
-    if(query.firstName)
+    if(name)
       p.paragraph.paragraph-query-info Displaying results for the Name 
-        b= `${query.firstName[0].toUpperCase()}${query.firstName.slice(1)}`
+        b= `${name.toUpperCase()}`
     
 
 
@@ -99,7 +99,7 @@ block content
               .card__picture-overlay &nbsp;
               |               
               //- img.card__picture-img(src='/img/users/default.jpg', alt=`${person.firstName} Photo`)
-              img.card__picture-img(src=`img/persons/${person.photo}`, alt=`${person.name} Photo`)
+              img.card__picture-img(src=`/img/persons/${person.photo}`, alt=`${person.name} Photo`)
           |           
           .card__details
             h4.card__sub-heading= `${person.name}`

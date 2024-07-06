@@ -20,6 +20,12 @@ router.get(
   viewsController.getSearchPerson,
 );
 
+router.get(
+  '/search-person/:name',
+  authController.protect,
+  viewsController.getSearchPersonByName,
+);
+
 // Route to render the form to add new person in found person collection
 router.get(
   '/report-found-person',
@@ -53,6 +59,13 @@ router.get(
   authController.protect,
   authController.restrictTo('admin'),
   viewsController.getFoundPersonReports,
+);
+
+router.get(
+  '/user-registrations-by-year',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getUserRegistrationsByYear,
 );
 
 router.get(

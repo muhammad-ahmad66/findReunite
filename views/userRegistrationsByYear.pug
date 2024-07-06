@@ -1,0 +1,20 @@
+extends base 
+
+block append head 
+  script(src='https://cdn.jsdelivr.net/npm/chart.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js')
+  link(rel="stylesheet", href="/css/statistics.css")
+
+
+block content 
+  .user-stat-container
+    h1 Registered Users Statistics
+    label(for='yearDropdown') Select Year:
+      <select id="yearDropdown"></select>
+      <canvas id="usersByMonthChart"></canvas>
+    //- .user-stat-container
+      //- select#yearDropdown
+      //-   // Options will be dynamically added by JavaScript
+      //- canvas#usersByMonthChart
+    p#noDataMessage.no-data-message

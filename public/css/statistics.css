@@ -33,3 +33,76 @@
 }
 
 /* ------- */
+
+/* ! User Statistics */
+
+.user-stat-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+label {
+  font-size: 16px;
+  color: #666;
+}
+
+#yearDropdown {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+}
+
+#yearDropdown:focus {
+  outline: none;
+}
+
+canvas {
+  margin-top: 20px;
+}
+
+#usersByMonthChartContainer {
+  width: 100%; /* Adjust as needed */
+  height: 400px; /* Adjust as needed */
+}
+
+.user-stat-container {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  min-height: 50vh;
+}
+
+#yearDropdown {
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+#usersByMonthChart {
+  width: 100%;
+}
+
+.no-data-message {
+  position: absolute;
+  top: 50%; /* Adjust to position vertically centered */
+  left: 50%; /* Adjust to position horizontally centered */
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  display: none; /* Initially hidden */
+}

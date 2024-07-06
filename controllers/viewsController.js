@@ -11,6 +11,31 @@ exports.getOverview = (req, res) => {
   });
 };
 
+exports.getSearchPersonByName = catchAsync(async (req, res, next) => {
+  const name = req.params.name.trim();
+
+  // Build a query to find a person by name
+  const query = {
+    name: { $regex: name, $options: 'i' },
+  };
+
+  const page = req.query.page ? parseInt(req.query.page, 10) : 1;
+
+  // Find the persons matching the query
+  const persons = await Person.find(query);
+  const totalPersons = persons.length;
+
+  // Persons found, respond with the data
+  res.status(200).render('search-person', {
+    title: 'Search-Person',
+    query: req.query,
+    persons,
+    totalResults: totalPersons,
+    page,
+    name,
+  });
+});
+
 exports.getSearchPerson = catchAsync(async (req, res, next) => {
   //* 1) GET PERSON DATA FROM DB COLLECTION
 
@@ -121,6 +146,13 @@ exports.getFoundPersonReports = catchAsync(async (req, res, next) => {
   res.status(200).render('found-persons-reports', {
     title: 'Found Persons Reports',
     Persons,
+  });
+});
+
+exports.getUserRegistrationsByYear = catchAsync(async (req, res, next) => {
+  res.status(200).render('userRegistrationsByYear', {
+    title: 'user registrations by year',
+    user: req.user,
   });
 });
 

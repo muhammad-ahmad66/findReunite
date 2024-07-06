@@ -30,7 +30,7 @@ const userPasswordForm = document.querySelector('.form-user-password');
 const foundPersonForm = document.querySelector('.reported-form');
 const missingPersonForm = document.querySelector('.missing-person-form');
 // const updatePersonForm = document.querySelector('.update-person-form');
-const searchForm = document.querySelector('.nav__search');
+// const searchForm = document.querySelector('.nav__search');
 const filterForm = document.querySelector('.nav__filter');
 
 // UPDATE PERSON DETAIL
@@ -183,7 +183,7 @@ if (userPasswordForm)
     document.getElementById('password').value = '';
     document.getElementById('password-confirm').value = '';
   });
-
+/*
 // ! SEARCH BY NAME
 if (searchForm)
   searchForm.addEventListener('submit', (e) => {
@@ -195,6 +195,8 @@ if (searchForm)
       window.location.href = `http://127.0.0.1:800/search-person?name=${name}`;
     else window.location.href = `http://127.0.0.1:800/search-person`;
   });
+
+*/
 
 // ! ADDING FILTER FIELD FUNCTIONALITY
 if (filterForm)
@@ -434,6 +436,8 @@ if (imgTargets.length > 0) {
 }
 
 // ! Create a CHART REPORT
+const btnMissingChart = document.getElementById('btn-missing-report');
+const btnFoundChart = document.getElementById('btn-found-report');
 import { fetchDataAndCreateChart } from './fetchDataAndCreateChart';
 import { generatePDF } from './generatePdf';
 
@@ -441,10 +445,18 @@ const personCanvasEl = document.getElementById('countryBarChart');
 const missingCanvasEl = document.getElementById('missingPersonsByCountryChart');
 let apiUrl;
 let chartLabel;
-if (personCanvasEl) {
-  apiUrl = 'http://127.0.0.1:800/api/v1/persons';
-  chartLabel = 'Found Persons';
-  fetchDataAndCreateChart(apiUrl, personCanvasEl, chartLabel);
+
+const btn = document.querySelector('.btn-temp');
+if (btn) {
+  btn.addEventListener('click', () => {
+    console.log('Button clicked');
+
+    if (personCanvasEl) {
+      apiUrl = 'http://127.0.0.1:800/api/v1/persons';
+      chartLabel = 'Found Persons';
+      fetchDataAndCreateChart(apiUrl, personCanvasEl, chartLabel);
+    }
+  });
 }
 
 if (missingCanvasEl) {
@@ -452,6 +464,36 @@ if (missingCanvasEl) {
   chartLabel = 'Missing Persons';
   fetchDataAndCreateChart(apiUrl, missingCanvasEl, chartLabel);
 }
+
+// ----------
+/*
+// Function to initialize a chart for a canvas element
+function initializeChart(apiUrl, chartLabel, canvasElement) {
+  // Check if canvasElement exists and is not already initialized
+  const initialized = canvasElement.dataset.initialized === 'true';
+  if (canvasElement && !initialized) {
+    fetchDataAndCreateChart(apiUrl, canvasElement, chartLabel);
+    canvasElement.dataset.initialized = 'true'; // Mark as initialized
+  }
+}
+
+// Initialize found persons chart if canvas exists
+const personCanvasEl = document.getElementById('countryBarChart');
+if (personCanvasEl) {
+  const apiUrl = 'http://127.0.0.1:800/api/v1/persons';
+  const chartLabel = 'Found Persons';
+  initializeChart(apiUrl, chartLabel, personCanvasEl);
+}
+
+// Initialize missing persons chart if canvas exists
+const missingCanvasEl = document.getElementById('missingPersonsByCountryChart');
+if (missingCanvasEl) {
+  const apiUrl = 'http://127.0.0.1:800/api/v1/missing-persons';
+  const chartLabel = 'Missing Persons';
+  initializeChart(apiUrl, chartLabel, missingCanvasEl);
+}
+
+*/
 
 // ! GENERATE PDF FILE AND DOWNLOAD
 const downloadBtn = document.getElementById('download-btn');
@@ -477,3 +519,85 @@ if (downloadBtn && missingCanvasEl)
       'Reported_Missing_Persons.pdf',
     );
   });
+
+import { updateChart, populateYearDropdown } from './userRegistrationsByYear';
+
+async function initialize() {
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+
+  // Get the year dropdown element
+  const yearDropdown = document.getElementById('yearDropdown');
+
+  if (yearDropdown) {
+    // Populate the dropdown with years
+    populateYearDropdown();
+
+    // Set the dropdown to the current year
+    yearDropdown.value = currentYear;
+
+    // Update the chart with data for the current year
+    await updateChart(currentYear.toString());
+
+    // Add an event listener to update the chart when the year selection changes
+    yearDropdown.addEventListener('change', async (event) => {
+      const selectedYear = event.target.value;
+      await updateChart(selectedYear);
+    });
+  }
+}
+
+// Call the initialize function to run the code
+document.addEventListener('DOMContentLoaded', initialize);
+
+/*
+import { updateChart, populateYearDropdown } from './userRegistrationsByYear';
+
+// nt listener to update chart when year selection changes
+const yearDropdown = document.getElementById('yearDropdown');
+const currentYear = new Date().getFullYear(); // Get current year
+
+if (yearDropdown) {
+  yearDropdown.value = currentYear;
+  populateYearDropdown();
+  await updateChart(currentYear.toString());
+
+  yearDropdown.addEventListener('change', (event) => {
+    const selectedYear = event.target.value;
+    // populateYearDropdown();
+    updateChart(selectedYear);
+  });
+}
+
+// updateChart(new Date().getFullYear().toString());
+// populateYearDropdown();
+*/
+
+//  !Search by name
+import { searchPersonByName } from './searchPersonByName';
+
+const searchForm = document.getElementById('searchForm');
+
+if (searchForm) {
+  searchForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('search-person-name').value;
+
+    searchPersonByName(name);
+  });
+}
+
+/*
+// ! SEARCH BY NAME
+if (searchForm)
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('search-person-name').value;
+
+    // searchPerson(name);
+    if (name)
+      window.location.href = `http://127.0.0.1:800/search-person?name=${name}`;
+    else window.location.href = `http://127.0.0.1:800/search-person`;
+  });
+
+*/
