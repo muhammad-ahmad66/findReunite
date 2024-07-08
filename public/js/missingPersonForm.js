@@ -11,7 +11,7 @@ export const missingForm = async (data) => {
     showPreloader(missingFormEl);
     const result = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:800/api/v1/missing-persons',
+      url: '/api/v1/missing-persons',
       data,
     });
 

@@ -49,36 +49,3 @@ export const generatePDF = function (
     doc.save(fileName);
   });
 };
-
-// Example usage:
-
-/*
-document.getElementById('download-btn').addEventListener('click', () => {
-  const { jsPDF } = window.jspdf;
-
-  // Create a new jsPDF instance
-  const doc = new jsPDF();
-
-  // Add company name and title
-  doc.setFontSize(20);
-  doc.text('Company Name', 20, 20);
-  doc.setFontSize(16);
-  doc.text('Country Distribution of Persons', 20, 30);
-
-  // Capture the chart as an image using html2canvas
-  html2canvas(document.getElementById('missingPersonsByCountryChart')).then(
-    (canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = 180;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      // Add the chart image to the PDF
-      doc.addImage(imgData, 'PNG', 15, 40, imgWidth, imgHeight);
-
-      // Save the PDF
-      doc.save('Country_Distribution.pdf');
-    },
-  );
-});
-
-*/

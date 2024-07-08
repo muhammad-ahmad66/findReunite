@@ -2,7 +2,7 @@
 export const updateChart = async function (selectedYear) {
   try {
     // Fetch data from your API
-    const response = await fetch(`api/v1/users/statistics/${selectedYear}`);
+    const response = await fetch(`/users/statistics/${selectedYear}`);
     const data = await response.json();
 
     if (data.status === 'success') {

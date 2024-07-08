@@ -3,12 +3,9 @@ import axios from 'axios';
 
 export const roleManagement = async (role, userId) => {
   try {
-    const response = await axios.patch(
-      `http://127.0.0.1:800/api/v1/users/assignRole/${userId}`,
-      {
-        role,
-      },
-    );
+    const response = await axios.patch(`/api/v1/users/assignRole/${userId}`, {
+      role,
+    });
 
     if (response.data.status === 'success') {
       showAlert('success', 'User has been Updated successfully!');
@@ -26,9 +23,7 @@ export const roleManagement = async (role, userId) => {
 
 export const deleteUser = async (userId) => {
   try {
-    const response = await axios.delete(
-      `http://127.0.0.1:800/api/v1/users/deleteUser/${userId}`,
-    );
+    const response = await axios.delete(`/api/v1/users/deleteUser/${userId}`);
 
     if (response.status === 204) {
       showAlert('success', 'User has been deleted successfully!');

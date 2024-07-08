@@ -8,7 +8,7 @@ export const searchPersonByName = async (name) => {
       // Redirect to the search-person page with the name included in the URL
 
       name = name.toLowerCase();
-      window.location.href = `http://127.0.0.1:800/search-person/${name}`;
+      window.location.href = `/search-person/${name}`;
     }, 500);
     // // }
     // console.log(result);

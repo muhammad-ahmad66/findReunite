@@ -11,7 +11,8 @@ export const foundForm = async (data) => {
     showPreloader(foundPersonEl);
     const result = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:800/api/v1/persons',
+      // url: 'http://127.0.0.1:800/api/v1/persons',
+      url: '/api/v1/persons', // now using relative url. b/c our website and api are at same server
       data,
     });
 

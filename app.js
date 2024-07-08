@@ -3,7 +3,8 @@ const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-// const helmet = require('helmet');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const personRoutes = require('./routes/personRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -14,16 +15,40 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
 
-// // app.use(helmet());
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       scriptSrc: ['self', 'cdnjs.cloudflare.com'],
-//     },
-//   }),
-// );
+app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        'cdnjs.cloudflare.com',
+        'http://127.0.0.1:800',
+        'https://unpkg.com',
+      ],
+      connectSrc: [
+        "'self'",
+        'http://127.0.0.1:800',
+        'wss://find-reunite-3pw002s6t-muhammad-ahmads-projects-9cf6f0ca.vercel.app',
+      ],
+      styleSrc: [
+        "'self'",
+        'cdnjs.cloudflare.com',
+        'https://cdn.jsdelivr.net',
+        'https://fonts.googleapis.com',
+      ],
+      imgSrc: ["'self'", 'data:'],
+      fontSrc: ["'self'", 'cdnjs.cloudflare.com', 'https://fonts.gstatic.com'],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  }),
+);
 
 app.use(cors());
+// allow access control to all origins
+
+app.options('*', cors());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +69,9 @@ app.use((req, res, next) => {
   // console.log(req.cookies);
   next();
 });
+
+app.use(compression()); // will compress codes that is send to the client
+
 // Mounting Routes
 app.use('/', viewRoutes);
 app.use('/api/v1/persons', personRoutes);

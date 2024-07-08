@@ -5,7 +5,7 @@ export const updatePerson = async (data) => {
   try {
     const result = await axios({
       method: 'PATCH',
-      url: `http://127.0.0.1:800/api/v1/persons/${personId}`,
+      url: `/api/v1/persons/${personId}`,
     });
 
     // from our api

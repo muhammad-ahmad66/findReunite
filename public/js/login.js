@@ -11,7 +11,7 @@ export const login = async (email, password) => {
     showPreloader(loginForm);
     const result = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:800/api/v1/users/login',
+      url: '/api/v1/users/login',
       data: {
         email,
         password,
@@ -31,7 +31,7 @@ export const login = async (email, password) => {
   } catch (err) {
     hidePreloader(loginForm, formContent);
     showAlert('error', err.response.data.message);
-    signupForm.innerHTML = formContent;
+    loginForm.innerHTML = formContent;
     window.setTimeout(() => {
       location.assign('/');
     }, 500);
@@ -42,7 +42,7 @@ export const logout = async () => {
   try {
     const result = await axios({
       method: 'GET',
-      url: 'http://127.0.0.1:800/api/v1/users/logout',
+      url: '/api/v1/users/logout',
     });
     location.reload(true);
     location.href = '/';

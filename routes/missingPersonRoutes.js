@@ -3,7 +3,7 @@ const express = require('express');
 const viewsController = require('../controllers/viewsController');
 
 const authController = require('../controllers/authController');
-const missingPersonController = require('../controllers/MissingPersonController');
+const missingPersonController = require('../controllers/missingPersonController');
 
 const router = express.Router();
 
