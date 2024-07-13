@@ -24,7 +24,5 @@ sphinx:
 #   - epub
 
 # Install the necessary Node.js dependencies
-nodejs:
-  install:
-    - path: ./
-      requirements: docs/package.json
+requirements:
+  - path: docs/package.json
