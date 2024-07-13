@@ -1,8 +1,36 @@
+// Function to populate the year dropdown with available years
+export const populateYearDropdown = function () {
+  const yearDropdown = document.getElementById('yearDropdown');
+  const currentYear = new Date().getFullYear(); // Get the current year
+
+  // Populate options dynamically with years from 2000 to the current year
+  for (let year = 2000; year <= currentYear; year++) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    yearDropdown.appendChild(option);
+  }
+
+  // Set default selection to the current year
+  yearDropdown.value = currentYear;
+};
+
 // Function to update the statistics chart
 export const updateChart = async function (selectedYear) {
   try {
     // Fetch data from your API
-    const response = await fetch(`/users/statistics/${selectedYear}`);
+    const response = await fetch(`api/v1/users/statistics/${selectedYear}`);
+    const contentType = response.headers.get('content-type');
+
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      throw new SyntaxError(`Expected JSON, got ${contentType}: ${text}`);
+    }
+
     const data = await response.json();
 
     if (data.status === 'success') {
@@ -66,23 +94,3 @@ export const updateChart = async function (selectedYear) {
     console.error('Error fetching data:', error);
   }
 };
-
-// Function to populate the year dropdown with available years
-
-export const populateYearDropdown = function () {
-  const yearDropdown = document.getElementById('yearDropdown');
-  const currentYear = new Date().getFullYear(); // Get current year
-
-  // Populate options dynamically with years from 2000 to current year
-  for (let year = 2000; year <= currentYear; year++) {
-    const option = document.createElement('option');
-    option.value = year;
-    option.textContent = year;
-    yearDropdown.appendChild(option);
-  }
-
-  // Set default selection to the current year and update the chart
-};
-
-// updateChart(new Date().getFullYear().toString());
-// populateYearDropdown();

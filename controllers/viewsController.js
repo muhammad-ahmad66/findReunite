@@ -70,13 +70,18 @@ exports.getSearchPerson = catchAsync(async (req, res, next) => {
   //? Built in views folder, search-person.pug
 
   //* 3) RENDER THAT TEMPLATE USING THE DATA FROM STEP#01
-
   res.status(200).render('search-person', {
     title: 'Search-Person',
     query: req.query,
     persons,
     totalResults: totalPersons,
     page,
+  });
+});
+
+exports.getSearchByImage = catchAsync(async function (req, res, next) {
+  res.status(200).render('searchByImage', {
+    title: 'Search by Image',
   });
 });
 

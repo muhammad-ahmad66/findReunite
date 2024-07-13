@@ -14,7 +14,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
-
+/*
 app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
@@ -45,6 +45,7 @@ app.use(
   }),
 );
 
+*/
 app.use(cors());
 // allow access control to all origins
 

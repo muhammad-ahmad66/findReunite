@@ -21,6 +21,12 @@ router.get(
 );
 
 router.get(
+  '/search-by-image',
+  authController.protect,
+  viewsController.getSearchByImage,
+);
+
+router.get(
   '/search-person/:name',
   authController.protect,
   viewsController.getSearchPersonByName,

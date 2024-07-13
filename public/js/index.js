@@ -531,8 +531,23 @@ if (missingCanvasEl) {
     }
   }
 
-  // Call the initialize function to run the code
-  document.addEventListener('DOMContentLoaded', initialize);
+  initialize();
+
+  // ! GENERATE PDF FILE AND DOWNLOAD
+  const userByYearDownloadBtn = document.getElementById(
+    'user-reg-by-year-download-btn',
+  );
+
+  if (userByYearDownloadBtn)
+    userByYearDownloadBtn.addEventListener('click', () => {
+      // Example usage: Call generatePDF with specific parameters
+      generatePDF(
+        'usersByMonthChart',
+        'findReunite',
+        'User Registered in 2024',
+        'User_Reg_in_a_Year.pdf',
+      );
+    });
 
   /*
 import { updateChart, populateYearDropdown } from './userRegistrationsByYear';
@@ -585,3 +600,30 @@ if (searchForm)
   });
 
 */
+
+// ! Compare Image
+const imgUploadForm = document.getElementById('uploadForm');
+
+if (imgUploadForm) {
+  imgUploadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const imageInput = document.getElementById('imageInput');
+    formData.append('photo', imageInput.files[0]);
+
+    try {
+      const response = await fetch('/api/v1/persons/compare-uploaded-image', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      console.log(result);
+      console.log(formData);
+      // Handle response based on your application's logic
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+}

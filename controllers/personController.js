@@ -1,5 +1,7 @@
 const multer = require('multer');
 const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
 
 const Person = require('./../models/personModel');
 const User = require('./../models/userModel');
@@ -7,8 +9,6 @@ const User = require('./../models/userModel');
 const APIFeatures = require('./../utils/apiFeature');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-
-// const personData = require('./../dev-data/person-sample-data');
 
 const multerStorage = multer.memoryStorage();
 

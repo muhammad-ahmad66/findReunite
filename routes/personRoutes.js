@@ -7,6 +7,17 @@ const router = express.Router();
 
 // router.param('id', personController.checkId);
 
+/*
+router.post(
+  '/compare-uploaded-image',
+  authController.protect,
+  personController.uploadPersonPhoto,
+  personController.resizePersonPhoto,
+  personController.detectFaceMiddleware,
+  // personController.compareUploadedImage,
+);
+*/
+
 router
   .route('/')
   .get(authController.protect, personController.getAllPersons)

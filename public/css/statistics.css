@@ -14,7 +14,8 @@
   margin-bottom: 30px;
 }
 
-#download-btn {
+#download-btn,
+#user-reg-by-year-download-btn {
   flex-grow: 1;
   background-color: #1dcb6e; /* Replace with your primary color */
   color: white;
@@ -26,6 +27,7 @@
   cursor: pointer;
   text-align: center;
   width: 250px;
+  display: inline-block;
 }
 
 #download-btn:hover {
