@@ -6,13 +6,11 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router
-  .route('/assignRole/:id')
-  .patch(
-    authController.protect,
-    authController.isAdmin,
-    authController.assignRole,
-  );
+router.route('/assignRole/:id').patch(
+  authController.protect,
+  // authController.isAdmin,
+  authController.assignRole,
+);
 // router
 //   .route('/makeAdmin/:id')
 //   .patch(

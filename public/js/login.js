@@ -32,9 +32,6 @@ export const login = async (email, password) => {
     hidePreloader(loginForm, formContent);
     showAlert('error', err.response.data.message);
     loginForm.innerHTML = formContent;
-    window.setTimeout(() => {
-      location.assign('/');
-    }, 500);
   }
 };
 

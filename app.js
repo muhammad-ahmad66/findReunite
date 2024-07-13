@@ -6,6 +6,11 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const helmet = require('helmet');
 
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+
 const personRoutes = require('./routes/personRoutes');
 const userRoutes = require('./routes/userRoutes');
 const viewRoutes = require('./routes/viewRoutes');
@@ -46,10 +51,23 @@ app.use(
 );
 
 */
+
+app.enable('trust proxy');
+
 app.use(cors());
 // allow access control to all origins
 
 app.options('*', cors());
+
+app.use(helmet());
+
+// Limit requests from same API
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!',
+});
+app.use('/api', limiter);
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -65,6 +83,19 @@ app.use(express.json()); // To parse data from req.body -called body parser
 
 // app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
+
+// Prevent parameter pollution
+app.use(
+  hpp({
+    whitelist: ['name', 'gender'],
+  }),
+);
 
 app.use((req, res, next) => {
   // console.log(req.cookies);

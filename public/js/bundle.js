@@ -12041,7 +12041,7 @@ var login = exports.login = /*#__PURE__*/function () {
           }, 500);
           // }
           console.log(result);
-          _context.next = 17;
+          _context.next = 16;
           break;
         case 11:
           _context.prev = 11;
@@ -12049,10 +12049,7 @@ var login = exports.login = /*#__PURE__*/function () {
           (0, _loader.hidePreloader)(loginForm, formContent);
           (0, _alerts.showAlert)('error', _context.t0.response.data.message);
           loginForm.innerHTML = formContent;
-          window.setTimeout(function () {
-            location.assign('/');
-          }, 500);
-        case 17:
+        case 16:
         case "end":
           return _context.stop();
       }
@@ -29385,7 +29382,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59236" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64688" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
