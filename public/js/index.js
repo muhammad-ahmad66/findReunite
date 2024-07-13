@@ -421,6 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     imgTargets.forEach((img) => imgObserver.observe(img));
   }
 
+  /*
   // ! Create a CHART REPORT
   const btnMissingChart = document.getElementById('btn-missing-report');
   const btnFoundChart = document.getElementById('btn-found-report');
@@ -451,35 +452,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetchDataAndCreateChart(apiUrl, missingCanvasEl, chartLabel);
   }
 
+  */
   // ----------
-  /*
-// Function to initialize a chart for a canvas element
-function initializeChart(apiUrl, chartLabel, canvasElement) {
-  // Check if canvasElement exists and is not already initialized
-  const initialized = canvasElement.dataset.initialized === 'true';
-  if (canvasElement && !initialized) {
-    fetchDataAndCreateChart(apiUrl, canvasElement, chartLabel);
-    canvasElement.dataset.initialized = 'true'; // Mark as initialized
+
+  // Function to initialize a chart for a canvas element
+  function initializeChart(apiUrl, chartLabel, canvasElement) {
+    // Check if canvasElement exists and is not already initialized
+    const initialized = canvasElement.dataset.initialized === 'true';
+    if (canvasElement && !initialized) {
+      fetchDataAndCreateChart(apiUrl, canvasElement, chartLabel);
+      canvasElement.dataset.initialized = 'true'; // Mark as initialized
+    }
   }
-}
 
-// Initialize found persons chart if canvas exists
-const personCanvasEl = document.getElementById('countryBarChart');
-if (personCanvasEl) {
-  const apiUrl = 'http://127.0.0.1:800/api/v1/persons';
-  const chartLabel = 'Found Persons';
-  initializeChart(apiUrl, chartLabel, personCanvasEl);
-}
+  // Initialize found persons chart if canvas exists
+  const personCanvasEl = document.getElementById('countryBarChart');
+  if (personCanvasEl) {
+    const apiUrl = 'http://127.0.0.1:800/api/v1/persons';
+    const chartLabel = 'Found Persons';
+    initializeChart(apiUrl, chartLabel, personCanvasEl);
+  }
 
-// Initialize missing persons chart if canvas exists
-const missingCanvasEl = document.getElementById('missingPersonsByCountryChart');
-if (missingCanvasEl) {
-  const apiUrl = 'http://127.0.0.1:800/api/v1/missing-persons';
-  const chartLabel = 'Missing Persons';
-  initializeChart(apiUrl, chartLabel, missingCanvasEl);
-}
-
-*/
+  // Initialize missing persons chart if canvas exists
+  const missingCanvasEl = document.getElementById(
+    'missingPersonsByCountryChart',
+  );
+  if (missingCanvasEl) {
+    const apiUrl = 'http://127.0.0.1:800/api/v1/missing-persons';
+    const chartLabel = 'Missing Persons';
+    initializeChart(apiUrl, chartLabel, missingCanvasEl);
+  }
 
   // ! GENERATE PDF FILE AND DOWNLOAD
   const downloadBtn = document.getElementById('download-btn');
@@ -549,29 +551,6 @@ if (missingCanvasEl) {
       );
     });
 
-  /*
-import { updateChart, populateYearDropdown } from './userRegistrationsByYear';
-
-// nt listener to update chart when year selection changes
-const yearDropdown = document.getElementById('yearDropdown');
-const currentYear = new Date().getFullYear(); // Get current year
-
-if (yearDropdown) {
-  yearDropdown.value = currentYear;
-  populateYearDropdown();
-  await updateChart(currentYear.toString());
-
-  yearDropdown.addEventListener('change', (event) => {
-    const selectedYear = event.target.value;
-    // populateYearDropdown();
-    updateChart(selectedYear);
-  });
-}
-
-// updateChart(new Date().getFullYear().toString());
-// populateYearDropdown();
-*/
-
   //  !Search by name
 
   const searchForm = document.getElementById('searchForm');
@@ -585,21 +564,6 @@ if (yearDropdown) {
     });
   }
 });
-
-/*
-// ! SEARCH BY NAME
-if (searchForm)
-  searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('search-person-name').value;
-
-    // searchPerson(name);
-    if (name)
-      window.location.href = `/search-person?name=${name}`;
-    else window.location.href = `/search-person`;
-  });
-
-*/
 
 // ! Compare Image
 const imgUploadForm = document.getElementById('uploadForm');

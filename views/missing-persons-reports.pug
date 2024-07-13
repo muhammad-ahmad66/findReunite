@@ -1,7 +1,10 @@
 extends base 
 
 block append head
-  script(src='https://cdn.jsdelivr.net/npm/chart.js')
+  //- script(src='https://cdn.jsdelivr.net/npm/chart.js')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css')
+  script(src='https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js')
+
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js')
   link(rel="stylesheet", href="/css/statistics.css")
