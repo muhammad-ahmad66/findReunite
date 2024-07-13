@@ -421,41 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     imgTargets.forEach((img) => imgObserver.observe(img));
   }
 
-  /*
-  // ! Create a CHART REPORT
-  const btnMissingChart = document.getElementById('btn-missing-report');
-  const btnFoundChart = document.getElementById('btn-found-report');
-
-  const personCanvasEl = document.getElementById('countryBarChart');
-  const missingCanvasEl = document.getElementById(
-    'missingPersonsByCountryChart',
-  );
-  let apiUrl;
-  let chartLabel;
-
-  const btn = document.querySelector('.btn-temp');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      console.log('Button clicked');
-
-      if (personCanvasEl) {
-        apiUrl = '/api/v1/persons';
-        chartLabel = 'Found Persons';
-        fetchDataAndCreateChart(apiUrl, personCanvasEl, chartLabel);
-      }
-    });
-  }
-
-  if (missingCanvasEl) {
-    apiUrl = '/api/v1/missing-persons';
-    chartLabel = 'Missing Persons';
-    fetchDataAndCreateChart(apiUrl, missingCanvasEl, chartLabel);
-  }
-
-  */
-  // ----------
-
-  // Function to initialize a chart for a canvas element
+  // ! Function to initialize a chart for a canvas element
   function initializeChart(apiUrl, chartLabel, canvasElement) {
     // Check if canvasElement exists and is not already initialized
     const initialized = canvasElement.dataset.initialized === 'true';
@@ -552,7 +518,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
   //  !Search by name
-
   const searchForm = document.getElementById('searchForm');
 
   if (searchForm) {

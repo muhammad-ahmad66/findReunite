@@ -1,3 +1,5 @@
+import Chart from 'chart.js/auto';
+
 // Function to populate the year dropdown with available years
 export const populateYearDropdown = function () {
   const yearDropdown = document.getElementById('yearDropdown');
@@ -42,6 +44,8 @@ export const updateChart = async function (selectedYear) {
       if (!monthlyCounts || Object.keys(monthlyCounts).length === 0) {
         console.error(`No data available for the year ${selectedYear}`);
         // Display the no data message
+        document.getElementById('user-reg-by-year-download-btn').style.display =
+          'none';
         noDataMessage.textContent = `No data available for ${selectedYear}`;
         noDataMessage.style.display = 'block'; // Show the message
         chartCanvas.style.display = 'none'; // Hide the chart canvas
@@ -50,15 +54,13 @@ export const updateChart = async function (selectedYear) {
 
       // Hide the no data message and show the chart canvas if data is available
       noDataMessage.style.display = 'none';
+      document.getElementById('user-reg-by-year-download-btn').style.display =
+        'inline-block';
       chartCanvas.style.display = 'block';
 
       // Extract labels (months) and data (counts) for the chart
       const labels = Object.keys(monthlyCounts);
       const dataCounts = Object.values(monthlyCounts);
-
-      // Set static suggestedMin and suggestedMax
-      const suggestedMin = 0; // Example value
-      const suggestedMax = 40; // Example value
 
       // If the chart already exists, destroy it before creating a new one
       if (
@@ -68,25 +70,25 @@ export const updateChart = async function (selectedYear) {
         window.usersByMonthChart.destroy();
       }
 
-      const chartData = {
-        labels: labels,
-        datasets: [
-          {
-            label: `Registered Users in ${selectedYear}`,
-            data: dataCounts,
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
+      // Create the chart only if chartCanvas exists
+      if (chartCanvas) {
+        const ctx = chartCanvas.getContext('2d');
+        window.usersByMonthChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: `Registered Users in ${selectedYear}`,
+                data: dataCounts,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1,
+              },
+            ],
           },
-        ],
-      };
-
-      // Create the chart
-      const ctx = chartCanvas.getContext('2d');
-      window.usersByMonthChart = new Chart(ctx, {
-        type: 'line',
-        data: chartData,
-      });
+        });
+      }
     } else {
       console.error(`Failed to fetch statistics for ${selectedYear}`);
     }
