@@ -1802,6 +1802,7 @@ body {
   border-radius: 4px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.28);
   margin-bottom: 3rem;
+  display: inline-block;
 }
 
 .description-box .description__label {
@@ -1898,4 +1899,26 @@ img {
 .features__header {
   font-size: 2rem;
   margin-bottom: 1rem;
+}
+
+/* ------ */
+.register-btn-container {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  border-radius: 9px;
+  gap: 0.4rem;
+}
+
+.register-btn-container p {
+  font-size: 1.6rem;
+}
+
+.register-btn-container a {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #20bf6b;
 }

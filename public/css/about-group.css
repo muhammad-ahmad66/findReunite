@@ -203,6 +203,11 @@ img {
   font-size: 1.25rem;
 }
 
+/* .button__ghost img {
+  height: 1.25rem;
+  width: 1.25rem;
+} */
+
 .button__ghost:hover {
   border: 3px solid var(--first-color);
 }
