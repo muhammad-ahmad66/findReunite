@@ -258,3 +258,9 @@ exports.checkForMatches = catchAsync(async (req, res, next) => {
 
   next();
 });
+
+exports.getUploadImageForm = (req, res) => {
+  res.status(200).render('upload-image-form', {
+    title: 'Upload Image',
+  });
+};

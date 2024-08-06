@@ -8,8 +8,16 @@ const compareController = require('../controllers/compareController');
 // router.get('/detect-face', compareController.detectFace);
 // router.get('/detect-faces-batch', detectFacesBatch, compareFace);
 
-router.get(
-  '/detect-faces-batch',
+// router.get(
+//   '/detect-faces-batch',
+//   compareController.detectFacesBatch,
+//   compareController.compareFace,
+// );
+
+router.post(
+  '/upload-static-image',
+  compareController.uploadStaticImage,
+  compareController.resizeStaticImage,
   compareController.detectFacesBatch,
   compareController.compareFace,
 );

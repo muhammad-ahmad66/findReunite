@@ -90,6 +90,8 @@ router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 
+router.get('/upload-image-form', viewsController.getUploadImageForm);
+
 // Static Pages
 router.get('/contact-us', viewsController.getContactUs);
 router.get('/about-group', viewsController.getAboutGroup);

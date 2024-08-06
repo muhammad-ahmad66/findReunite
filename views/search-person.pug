@@ -8,21 +8,9 @@ block content
         |           
         span.heading-primary--sub missing people 
 
-      .upload-image-box 
-        section.image-upload-section
-          h2 Search by Image
-          #drop-area.drop-area
-            p Drag &amp; Drop your image here or
-            input#fileElem(type='file' accept='image/*' onchange='handleFiles(this.files)')
-            label.button(for='fileElem') Choose a file
-            span#fileLabel No file chosen
-          #preview      
-    //- .search-row
-    //-   form.nav__search
-    //-     button.nav__search-btn
-    //-       i.ph.ph-magnifying-glass
-    //-     |           
-    //-     input.nav__search-input(type='text', placeholder='Search Person Name')    
+  
+               
+ 
     .search-row
       form.nav__search#searchForm(action="/api/v1/persons/search", method="GET")
         button.nav__search-btn(type="submit")
@@ -63,7 +51,9 @@ block content
         //- button.btn-search#btn-filter(type="submit") Apply filters
 
         // Add more filter options as needed (e.g., missing since, gender, etc.)
-    
+    .upload-image-box 
+        a.btn.btn--green#btn-search-by-picture(href="/upload-image-form") Search By Picture
+  
     if(query.approxAge)
       p.paragraph.paragraph-query-info Displaying results for ages between 
         b #{query.approxAge.gte} 

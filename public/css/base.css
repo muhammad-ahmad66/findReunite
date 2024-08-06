@@ -1922,3 +1922,8 @@ img {
   text-decoration: none;
   color: #20bf6b;
 }
+
+#btn-search-by-picture {
+  margin-top: 18px;
+  border-radius: 4px;
+}

@@ -1,0 +1,12 @@
+
+
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/upload-image.css")
+
+block content
+  .upload-container
+    form(action='/api/v1/compare/upload-static-image', method='post', enctype='multipart/form-data')
+      input#fileInput(type='file', name='staticImage')
+      button(type='submit') Upload and Compare
