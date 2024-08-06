@@ -51,9 +51,11 @@ block content
         //- button.btn-search#btn-filter(type="submit") Apply filters
 
         // Add more filter options as needed (e.g., missing since, gender, etc.)
-    .upload-image-box 
-        a.btn.btn--green#btn-search-by-picture(href="/upload-image-form") Search By Picture
-  
+    .upload-container#upload-person-image-container
+      form(action='/api/v1/compare/upload-static-image', method='post', enctype='multipart/form-data')
+        input#fileInput(type='file', name='staticImage')
+        button(type='submit') Upload and Compare  
+
     if(query.approxAge)
       p.paragraph.paragraph-query-info Displaying results for ages between 
         b #{query.approxAge.gte} 
