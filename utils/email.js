@@ -24,6 +24,17 @@ module.exports = class Email {
       );
     }
 
+    return nodemailer.createTransport({
+      service: 'gmail',
+      secure: true,
+      port: 465,
+      auth: {
+        user: 'muhammadugv66@gmail.com',
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+
+    /*
     // FOR DEVELOPMENT
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
@@ -33,6 +44,7 @@ module.exports = class Email {
         pass: process.env.EMAIL_PASSWORD,
       },
     });
+    */
   }
 
   // Send the actual email

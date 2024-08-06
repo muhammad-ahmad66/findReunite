@@ -14,11 +14,13 @@ const hpp = require('hpp');
 const personRoutes = require('./routes/personRoutes');
 const userRoutes = require('./routes/userRoutes');
 const viewRoutes = require('./routes/viewRoutes');
+const compareImageRoute = require('./routes/compareImageRoute');
 const missingPersonRoutes = require('./routes/missingPersonRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
+
 /*
 app.use(helmet());
 app.use(
@@ -59,15 +61,29 @@ app.use(cors());
 
 app.options('*', cors());
 
-app.use(helmet());
+// app.use(helmet());
 
 // Limit requests from same API
+/*
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour!',
 });
 app.use('/api', limiter);
+
+*/
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  // Define custom key generator
+  keyGenerator: (req) => req.ip,
+  // Optionally configure trust proxy setting
+  trustProxy: false, // Set to true if behind a reverse proxy
+});
+
+app.use(limiter);
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -109,6 +125,7 @@ app.use('/', viewRoutes);
 app.use('/api/v1/persons', personRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/missing-persons', missingPersonRoutes);
+app.use('/api/v1/compare', compareImageRoute);
 
 // ---------
 // ERROR HANDLING

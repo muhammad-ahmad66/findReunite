@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initialize found persons chart if canvas exists
   const personCanvasEl = document.getElementById('countryBarChart');
   if (personCanvasEl) {
-    const apiUrl = 'http://127.0.0.1:800/api/v1/persons';
+    const apiUrl = '/api/v1/persons';
     const chartLabel = 'Found Persons';
     initializeChart(apiUrl, chartLabel, personCanvasEl);
   }
@@ -444,7 +444,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     'missingPersonsByCountryChart',
   );
   if (missingCanvasEl) {
-    const apiUrl = 'http://127.0.0.1:800/api/v1/missing-persons';
+    const apiUrl = '/api/v1/missing-persons';
     const chartLabel = 'Missing Persons';
     initializeChart(apiUrl, chartLabel, missingCanvasEl);
   }

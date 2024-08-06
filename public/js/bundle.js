@@ -29250,7 +29250,7 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/_asyncToGenerator( /*
         // Initialize found persons chart if canvas exists
         personCanvasEl = document.getElementById('countryBarChart');
         if (personCanvasEl) {
-          apiUrl = 'http://127.0.0.1:800/api/v1/persons';
+          apiUrl = '/api/v1/persons';
           chartLabel = 'Found Persons';
           initializeChart(apiUrl, chartLabel, personCanvasEl);
         }
@@ -29258,7 +29258,7 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/_asyncToGenerator( /*
         // Initialize missing persons chart if canvas exists
         missingCanvasEl = document.getElementById('missingPersonsByCountryChart');
         if (missingCanvasEl) {
-          _apiUrl = 'http://127.0.0.1:800/api/v1/missing-persons';
+          _apiUrl = '/api/v1/missing-persons';
           _chartLabel = 'Missing Persons';
           initializeChart(_apiUrl, _chartLabel, missingCanvasEl);
         }
@@ -29382,7 +29382,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50548" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50158" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
