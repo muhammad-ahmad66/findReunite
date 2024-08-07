@@ -40,6 +40,7 @@ findReunite is a web application designed to improve the search and reunificatio
 - Node.js
 - Express.js
 - MongoDB
+- Pug
 
 ### Frontend
 
@@ -49,7 +50,7 @@ findReunite is a web application designed to improve the search and reunificatio
 
 ### Tools
 
-- Visual Studio Code
+- VS Code
 - Postman
 - Git
 
@@ -109,25 +110,28 @@ The findReunite application follows the MVC (Model-View-Controller) architecture
 
 ### User Endpoints
 
-- **Register User:** `POST /api/users/register`
+- **Register User:** `POST /api/users/signup`
 - **Login User:** `POST /api/users/login`
-- **Get User Profile:** `GET /api/users/profile`
+- **Get User Profile:** `GET /api/users/me`
 
 ### Missing Persons Endpoints
 
-- **Report Missing Person:** `POST /api/missing`
-- **Search Missing Persons:** `GET /api/missing/search`
+- **Report Missing Person:** `POST /api/missingPersons`
+- **Search Missing Persons:** `GET /api/missingPersons/:id`
 
 ### Found Persons Endpoints
 
-- **Report Found Person:** `POST /api/found`
-- **Search Found Persons:** `GET /api/found/search`
+- **Report Found Person:** `POST /api/person`
+- **Search Found Persons:** `GET /api/person/:id`
+- **Search Found Persons By Name:** `GET /api/person/name/muhammad`
 
 ### Admin Endpoints
 
 - **Get All Users:** `GET /api/admin/users`
 - **Make User Admin:** `PUT /api/admin/users/:id/admin`
 - **Delete User:** `DELETE /api/admin/users/:id`
+- **Mange Persons:** `PATCH /api/persons/`
+- **Mange Missing Persons:** `PATCH /api/missingPersons/`
 
 ## Email Notifications
 
