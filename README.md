@@ -1,161 +1,125 @@
-# findReunite
+# FindReunite Project
 
 ## Introduction
 
-findReunite is a web application designed to improve the search and reunification process for missing persons worldwide. It offers a user-friendly interface and advanced search functionalities, including image recognition, to address gaps in existing systems.
+FindReunite is a web application designed to assist in reuniting missing persons with their families. The platform allows users to register, search for missing and found persons, and receive notifications when a match is found.
 
-## Table of Contents
+## Live Preview
 
-- [Introduction](#introduction)
-- [Objectives](#objectives)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
+[FindReunite Live Preview](https://find-reunite.vercel.app/)
 
-## Objectives
+## GitHub Repository
 
-- Provide a global platform for reporting and searching for missing persons.
-- Enhance search capabilities with image recognition.
-- Ensure a user-friendly interface accessible to users of all technical backgrounds.
-- Facilitate direct contact between users and reporters of missing persons.
-- Provide real-time notifications for updates and potential matches.
+[FindReunite GitHub Code](https://github.com/muhammad-ahmad66/findReunite)
 
-## Features
+## Objectives / Goals
 
-- **Global Reach:** Supports searches and reports from users worldwide.
-- **User-Friendly UI:** Simple and intuitive interface.
-- **Search by Image:** Upload photos to find potential matches based on visual similarities.
-- **Direct Contact:** Users can directly contact the individual who reported a missing person.
-- **Real-Time Notifications:** Immediate email notifications for updates and matches.
+- Develop a user-friendly interface for searching and reporting missing persons.
+- Implement a robust backend to handle user data and image processing.
+- Ensure secure authentication and authorization using JWT.
+- Notify users via email when a potential match is found.
 
-## Technologies Used
-
-### Backend
+## Requirements
 
 - Node.js
 - Express.js
 - MongoDB
-- Pug
+- HTML, CSS, JavaScript
+- Vercel for deployment
 
-### Frontend
+## Project Design
 
-- HTML
-- CSS
-- JavaScript
+### Conceptual / Logical Design
 
-### Tools
+#### ERD, USE CASES
+
+- **Entities**: Users, MissingPersons, FoundPersons, Locations
+- **Use Cases**: Register, Login, logout, update profile settings, change password, Report Missing Person, Report Found Persons, Search Person by Name, Search Person by Image, Apply Filters (age, gender, region etc), Sort Results(by name, by age), View User Dashboard, View Admin Dashboard, Update/Delete reported Missing & Found Person, Generate Statistics & Reports, Convert Reports to PDF and Download it, Manage Users, Make user an Admin, Upload, Resize and compare images, Protect and Restrict Routes vie JWT tokens, Retrieve Locations from user device, Receive Email when sigh up and potential match found and handling different types of Errors.
+
+### Physical Design
+
+#### Backend Design (Database)
+
+- MongoDB for storing user, missing person, and found person data.
+- Embedded collections for location data.
+
+### Front End Design
+
+- HTML for structure
+- CSS for styling
+- JavaScript for interactivity
+
+## Tools
 
 - VS Code
-- Postman
-- Git
+- Postman for API testing
+- Git for version control
+- Vercel for deployment
 
-### Security
+## Implementation Decisions
 
-- JWT (JSON Web Tokens) for authentication and authorization
+### Architecture Choice (MVC)
 
-## MVC Architecture
+MVC (Model-View-Controller) architecture was selected to structure both the backend API and the frontend application. This decision facilitates separation of concerns: Models manage data representation and business logic (e.g., MongoDB schemas), Views handle user interface presentation (HTML/CSS/JS), and Controllers orchestrate interactions between Models and Views, as well as manage API endpoints.
 
-The findReunite application follows the MVC (Model-View-Controller) architecture pattern:
+### Backend Framework (Node.js with Express)
 
-- **Model:** Manages data representation and business logic, using MongoDB schemas for data storage.
-- **View:** Handles the presentation layer, rendering HTML/CSS/JS for user interaction.
-- **Controller:** Manages the flow of data between models and views, handling HTTP requests and responses, and defining API endpoints.
+Node.js was chosen for its efficiency in handling asynchronous operations, making it suitable for building scalable and high-performance APIs. Express.js complements Node.js by providing a robust framework for routing, middleware integration, and handling HTTP requests and responses. And also use Pug as a template engine.
 
-## Installation
+### Strong Authentication and Authorization
 
-1. **Clone the repository:**
+To ensure secure authentication and authorization, we implemented JWT (JSON Web Tokens). JWTs authenticate users and authorize access to protected endpoints. Below is an example of how to use API endpoints with JWT in JavaScript:
 
-    ```bash
-    git clone https://github.com/yourusername/findReunite.git
-    cd findReunite
+1. **Get JWT Token:**
+
+    ```javascript
+    let token = 'YOUR_TOKEN';
+    fetch('{{domain}}api/v1/users/signup', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: 'user@example.com',
+        password: 'yourpassword'
+        passwordConfirm: 'yourpassword'
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => console.error('Error:', error));
     ```
 
-2. **Install dependencies:**
+### Frontend Technologies
 
-    ```bash
-    npm install
-    ```
+HTML, CSS, and JavaScript form the core technologies for developing the frontend application. HTML provides the structure of web pages, CSS styles the presentation, and JavaScript enhances interactivity and dynamic behavior, communicating with the backend API to fetch and manipulate data.
 
-3. **Set up environment variables:**
-    Create a `.env` file in the root directory and add the following:
+<!-- ## Screenshots of Your System
 
-    ```env
-    PORT=8000
-    MONGO_URI=your_mongodb_uri
-    JWT_SECRET=your_jwt_secret
-    EMAIL_SERVICE=your_email_service
-    EMAIL_USER=your_email_user
-    EMAIL_PASS=your_email_password
-    ```
+*(Include screenshots of different parts of your application here)* -->
 
-4. **Start the application:**
+## Contributions (Achieved Objectives / Goals)
 
-    ```bash
-    npm start
-    ```
+- Successfully implemented user registration, login, and profile management.
+- Developed functionalities for reporting missing and found persons.
+- Integrated image upload and face comparison features.
+- Set up email notifications for matched persons.
+- Deployed the application on Vercel for live access.
 
-## Usage
+## Developer Team
 
-- **Homepage:** Browse the homepage to understand the platform's purpose.
-- **Search for Missing Persons:** Use the search feature to find missing persons based on name, description, or image.
-- **Report a Missing Person:** Submit a report with details and an image of the missing person.
-- **Notifications:** Receive email notifications for updates and matches.
+- **Name**: Muhammad Ahmad
+  - **Email**: <muhammadugv66@gmail.com>
+- **Name**: Hamid Ali
+  - **Email**: <creative@gmail.com>
+- **Name**: Hamid Ali Raza
+  - **Email**: <himdaliraza@gmail.com>
 
-## API Endpoints
-
-### User Endpoints
-
-- **Register User:** `POST /api/users/signup`
-- **Login User:** `POST /api/users/login`
-- **Get User Profile:** `GET /api/users/me`
-
-### Missing Persons Endpoints
-
-- **Report Missing Person:** `POST /api/missingPersons`
-- **Search Missing Persons:** `GET /api/missingPersons/:id`
-
-### Found Persons Endpoints
-
-- **Report Found Person:** `POST /api/person`
-- **Search Found Persons:** `GET /api/person/:id`
-- **Search Found Persons By Name:** `GET /api/person/name/muhammad`
-
-### Admin Endpoints
-
-- **Get All Users:** `GET /api/admin/users`
-- **Make User Admin:** `PUT /api/admin/users/:id/admin`
-- **Delete User:** `DELETE /api/admin/users/:id`
-- **Mange Persons:** `PATCH /api/persons/`
-- **Mange Missing Persons:** `PATCH /api/missingPersons/`
-
-## Email Notifications
-
-When a potential match is found between a missing person and a found person, the system sends an email notification to the user. This ensures timely updates and allows users to take immediate action.
-
-## Testing
-
-- **Black-Box Testing:** User interface testing, API endpoint testing using Postman.
-- **White-Box Testing:** Unit testing for backend logic and functions.
-
-## Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Feel free to reach out to us for any questions or collaboration opportunities.
 
 ---
 
-Thank you for using findReunite! We hope our platform helps in reuniting missing persons with their loved ones.
+This README.md provides an overview of the FindReunite project, including its design, implementation, and usage details. For more information, please refer to the live preview or the GitHub repository.
