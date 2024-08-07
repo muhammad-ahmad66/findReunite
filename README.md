@@ -109,7 +109,11 @@ HTML, CSS, and JavaScript form the core technologies for developing the frontend
 - Set up email notifications for matched persons.
 - Deployed the application on Vercel for live access.
 
-## Developer Team
+## Special Thanks to Our Mentor
+
+We would like to extend our deepest gratitude to our mentor, Sir Dr. Yesser Arafat (Assistant Professor MUST), for their unwavering dedication and invaluable contributions. Their guidance and support have been instrumental in the successful completion of this project.
+
+## Our Team
 
 - **Name**: Muhammad Ahmad
   - **Email**: <muhammadugv66@gmail.com>
