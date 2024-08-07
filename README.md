@@ -1,90 +1,157 @@
-# FindReunite
+# findReunite
 
-FindReunite is a web application dedicated to the noble cause of reuniting families and communities. It provides a platform for securely reporting missing persons, searching for individuals, and contributing to the effort of locating missing loved ones.
+## Introduction
+
+findReunite is a web application designed to improve the search and reunification process for missing persons worldwide. It offers a user-friendly interface and advanced search functionalities, including image recognition, to address gaps in existing systems.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Objectives](#objectives)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Objectives
+
+- Provide a global platform for reporting and searching for missing persons.
+- Enhance search capabilities with image recognition.
+- Ensure a user-friendly interface accessible to users of all technical backgrounds.
+- Facilitate direct contact between users and reporters of missing persons.
+- Provide real-time notifications for updates and potential matches.
 
 ## Features
 
-- Secure user registration and authentication system.
-- Submit comprehensive missing person reports.
-- Advanced search functionality with filters and image recognition.
-- Public access to the missing persons database.
-- Admin management dashboard for monitoring and managing reports.
-- Contribution module for uploading information about found persons.
-- RESTful API for external integration.
-- Responsive design for cross-device compatibility.
-
-## Installation
-
-To run the FindReunite application locally, follow these steps:
-
-1. Clone this repository to your local machine.
-2. Install the necessary dependencies using `npm install`.
-3. Set up a MongoDB database and configure the connection in the `.env` file.
-4. Run the application using `npm start`.
-5. Access the application in your web browser at `http://localhost:3000`.
-
-## Usage
-
-- Register for an account or log in if you already have one.
-- Report missing persons by providing detailed information.
-- Search for missing individuals using advanced search filters or image recognition.
-- Contribute to the database by uploading information about found persons.
-- Admin users can manage reports and monitor platform activity through the dashboard.
+- **Global Reach:** Supports searches and reports from users worldwide.
+- **User-Friendly UI:** Simple and intuitive interface.
+- **Search by Image:** Upload photos to find potential matches based on visual similarities.
+- **Direct Contact:** Users can directly contact the individual who reported a missing person.
+- **Real-Time Notifications:** Immediate email notifications for updates and matches.
 
 ## Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript
+### Backend
+
 - Node.js
 - Express.js
 - MongoDB
-- Mongoose
-- Bootstrap
-- Postman (for API testing)
-- Git & GitHub (for version control)
 
-## Dependencies
+### Frontend
 
-- **@babel/polyfill**: ^7.12.1
-- **axios**: ^1.6.8
-- **bcryptjs**: ^2.4.3
-- **cookie-parser**: ^1.4.6
-- **cors**: ^2.8.5
-- **dotenv**: ^16.4.5
-- **express**: ^4.18.2
-- **jsonwebtoken**: ^9.0.2
-- **lodash**: ^4.17.21
-- **mongodb**: ^6.5.0
-- **mongoose**: ^8.2.0
-- **morgan**: ^1.10.0
-- **multer**: ^1.4.5-lts.1
-- **pug**: ^3.0.2
-- **sass**: ^1.75.0
-- **sharp**: ^0.33.3
-- **validator**: ^13.11.0
+- HTML
+- CSS
+- JavaScript
 
-## DevDependencies
+### Tools
 
-- **autoprefixer**: ^10.4.19
-- **concat**: ^1.0.3
-- **eslint**: ^8.57.0
-- **eslint-config-airbnb**: ^19.0.4
-- **eslint-config-prettier**: ^9.1.0
-- **eslint-plugin-import**: ^2.29.1
-- **eslint-plugin-jsx-a11y**: ^6.8.0
-- **eslint-plugin-node**: ^11.1.0
-- **eslint-plugin-prettier**: ^5.1.3
-- **eslint-plugin-react**: ^7.33.2
-- **nodemon**: ^3.1.0
-- **parcel-bundler**: ^1.12.5
-- **prettier**: ^3.2.5
+- Visual Studio Code
+- Postman
+- Git
 
-## Contributors
+### Security
 
-- [Muhammad Ahmad](https://github.com/muhammad-admad66)
-- [Another Contributor](https://github.com/anotherusername)
+- JWT (JSON Web Tokens) for authentication and authorization
+
+## MVC Architecture
+
+The findReunite application follows the MVC (Model-View-Controller) architecture pattern:
+
+- **Model:** Manages data representation and business logic, using MongoDB schemas for data storage.
+- **View:** Handles the presentation layer, rendering HTML/CSS/JS for user interaction.
+- **Controller:** Manages the flow of data between models and views, handling HTTP requests and responses, and defining API endpoints.
+
+## Installation
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/yourusername/findReunite.git
+    cd findReunite
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Set up environment variables:**
+    Create a `.env` file in the root directory and add the following:
+
+    ```env
+    PORT=8000
+    MONGO_URI=your_mongodb_uri
+    JWT_SECRET=your_jwt_secret
+    EMAIL_SERVICE=your_email_service
+    EMAIL_USER=your_email_user
+    EMAIL_PASS=your_email_password
+    ```
+
+4. **Start the application:**
+
+    ```bash
+    npm start
+    ```
+
+## Usage
+
+- **Homepage:** Browse the homepage to understand the platform's purpose.
+- **Search for Missing Persons:** Use the search feature to find missing persons based on name, description, or image.
+- **Report a Missing Person:** Submit a report with details and an image of the missing person.
+- **Notifications:** Receive email notifications for updates and matches.
+
+## API Endpoints
+
+### User Endpoints
+
+- **Register User:** `POST /api/users/register`
+- **Login User:** `POST /api/users/login`
+- **Get User Profile:** `GET /api/users/profile`
+
+### Missing Persons Endpoints
+
+- **Report Missing Person:** `POST /api/missing`
+- **Search Missing Persons:** `GET /api/missing/search`
+
+### Found Persons Endpoints
+
+- **Report Found Person:** `POST /api/found`
+- **Search Found Persons:** `GET /api/found/search`
+
+### Admin Endpoints
+
+- **Get All Users:** `GET /api/admin/users`
+- **Make User Admin:** `PUT /api/admin/users/:id/admin`
+- **Delete User:** `DELETE /api/admin/users/:id`
+
+## Email Notifications
+
+When a potential match is found between a missing person and a found person, the system sends an email notification to the user. This ensures timely updates and allows users to take immediate action.
+
+## Testing
+
+- **Black-Box Testing:** User interface testing, API endpoint testing using Postman.
+- **White-Box Testing:** Unit testing for backend logic and functions.
+
+## Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+Thank you for using findReunite! We hope our platform helps in reuniting missing persons with their loved ones.
