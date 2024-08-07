@@ -36,40 +36,63 @@ exports.getSearchPersonByName = catchAsync(async (req, res, next) => {
   });
 });
 
+const mongoose = require('mongoose');
+
 exports.getSearchPerson = catchAsync(async (req, res, next) => {
-  //* 1) GET PERSON DATA FROM DB COLLECTION
-
   let filter = {};
-
-  // Initialize APIFeatures instance without pagination to get the total count
-  const featuresWithoutPagination = new APIFeatures(
-    Person.find(filter),
-    req.query,
-  )
-    .filter()
-    .sort()
-    .limitFields();
-
-  // Execute query to get total persons count
-  const totalPersons = await featuresWithoutPagination.query.countDocuments();
-  console.log(totalPersons);
-
-  // Initialize APIFeatures instance with pagination
-  const featuresWithPagination = new APIFeatures(Person.find(filter), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-
-  // Execute query to get paginated results
-  const persons = await featuresWithPagination.query;
-
+  let persons = [];
+  let totalPersons = 0;
   const page = req.query.page ? parseInt(req.query.page, 10) : 1;
 
-  //* 2) BUILD TEMPLATE
-  //? Built in views folder, search-person.pug
+  // Check if personIds are provided in the query
+  if (req.query.personIds) {
+    const personIds = req.query.personIds.split(',').map((id) => id.trim());
 
-  //* 3) RENDER THAT TEMPLATE USING THE DATA FROM STEP#01
+    // Validate the IDs
+    const validPersonIds = personIds.filter(mongoose.Types.ObjectId.isValid);
+
+    filter = { _id: { $in: validPersonIds } };
+
+    console.log('Filter:', filter);
+
+    // Execute query to get the persons without APIFeatures
+    persons = await Person.find(filter);
+    totalPersons = persons.length;
+
+    console.log('Persons:', persons);
+  } else {
+    // If personIds are not provided, use APIFeatures
+    console.log('Using APIFeatures');
+
+    // Initialize APIFeatures instance without pagination to get the total count
+    const featuresWithoutPagination = new APIFeatures(
+      Person.find(filter),
+      req.query,
+    )
+      .filter()
+      .sort()
+      .limitFields();
+
+    // Execute query to get total persons count
+    totalPersons = await featuresWithoutPagination.query.countDocuments();
+    console.log('Total Persons:', totalPersons);
+
+    // Initialize APIFeatures instance with pagination
+    const featuresWithPagination = new APIFeatures(
+      Person.find(filter),
+      req.query,
+    )
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    // Execute query to get paginated results
+    persons = await featuresWithPagination.query;
+    console.log('Persons:', persons);
+  }
+
+  // Render the template with the data
   res.status(200).render('search-person', {
     title: 'Search-Person',
     query: req.query,
