@@ -8,39 +8,47 @@
 }
 
 .contact-header h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
 .contact-header p {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: #555;
 }
 
 .contact-map {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 80vh;
 }
 
 .contact-details {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 4rem;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .contact-info {
   flex: 1;
   max-width: 45%;
   background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-  color: #fff; /* Set text color to white */
-  padding: 1rem;
+  color: #fff;
+  padding: 2.4rem;
   border-radius: 8px;
 }
 
 .contact-info a {
-  color: #fff; /* Ensure links are white */
+  color: #fff;
   text-decoration: none;
+  font-size: 1.6rem;
 }
 
 .contact-info a:hover {
@@ -53,22 +61,28 @@
 .contact-info .email {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .contact-info i {
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   margin-right: 0.5rem;
 }
 
 .contact-info .social {
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.8rem;
+  margin-top: 1.6rem;
 }
 
 .contact-info .social a {
-  font-size: 1.5rem;
+  font-size: 2.2rem;
+  transition: all 0.5s;
+}
+
+.contact-info .social a:hover {
+  color: #f7f7f7;
+  transform: translateY(-2px);
 }
 
 .contact-form {
@@ -77,13 +91,14 @@
 }
 
 .contact-form .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem; /* 10px */
 }
 
 .contact-form label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   font-weight: bold;
+  font-size: 1.6rem;
 }
 
 .contact-form input,
@@ -92,19 +107,19 @@
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 1.6rem;
 }
 
 .contact-form button.btn {
   background-color: #28b487;
   color: #fff;
-  padding: 0.75rem 1.5rem;
+  padding: 1.45rem 2.2rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.6rem;
 }
 
-.contact-form button.btn:hover {
+contact-form button.btn:hover {
   background-color: #7dd56f;
 }

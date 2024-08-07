@@ -237,6 +237,7 @@ exports.getTerms = (req, res) => {
 exports.getContactUs = (req, res) => {
   res.status(200).render('contact', {
     title: 'Contact Us',
+    page: 'contact-us',
   });
 };
 
