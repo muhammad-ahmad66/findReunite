@@ -37,14 +37,16 @@ const userSchema = mongoose.Schema({
   contact: {
     type: String,
     required: [true, 'Please provide your contact number'],
-    validate: [
-      {
-        validator: function (contactNumber) {
-          return validator.isMobilePhone(contactNumber);
-        },
-        message: 'Please provide a valid phone number.',
-      },
-    ],
+    // validate: [
+    //   {
+    //     validator: function (contactNumber) {
+    //       return validator.isMobilePhone(contactNumber, 'any', {
+    //         strictMode: true,
+    //       });
+    //     },
+    //     message: 'Please provide a valid phone number.',
+    //   },
+    // ],
   },
 
   location: {

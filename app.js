@@ -75,12 +75,10 @@ app.use('/api', limiter);
 */
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 0.5 * 60 * 1000, //  30seconds
   max: 100, // Limit each IP to 100 requests per windowMs
-  // Define custom key generator
   keyGenerator: (req) => req.ip,
-  // Optionally configure trust proxy setting
-  trustProxy: false, // Set to true if behind a reverse proxy
+  trustProxy: true, // Ensure this matches your global proxy setting
 });
 
 app.use(limiter);
