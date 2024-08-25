@@ -51,11 +51,11 @@ block content
         |           
         .section-about__right-column
           .composition
-            img.composition__photo.composition__photo--p1(srcset='img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w', sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px', alt='Photo 1', src='img/nat-1.jpg')
+            img.lazy-img.composition__photo.composition__photo--p1( alt='Photo 1', src='img/nat-1-lazy.jpg', data-src='img/nat-1.jpg')
             |               
-            img.composition__photo.composition__photo--p2(srcset='img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w', sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px', alt='Photo 2', src='img/nat-2.jpg')
+            img.lazy-img.composition__photo.composition__photo--p2( alt='Photo 2', src='img/nat-2-lazy.jpg', data-src='/img/nat-2.jpg')
             |               
-            img.composition__photo.composition__photo--p3(srcset='img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w', sizes='(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px', alt='Photo 3', src='img/nat-3.jpg')
+            img.lazy-img.composition__photo.composition__photo--p3( alt='Photo 3', src='img/nat-3-lazy.jpg', data-src='img/nat-3.jpg')
             //
               <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
               <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
@@ -67,7 +67,7 @@ block content
         h3.feature-section__header
           | Everything you need in a modern missing persons platform and more.
       .features
-        img.features__img.lazy-img(src='img/digital-lazy.jpg' data-src='img/digital.jpg' alt='Computer')
+        img.features__img.lazy-img(src='img/filter-lazy.jpg' data-src='img/filter.jpg' alt='Search Filter imae')
         .features__feature
           .features__icon
             svg
@@ -75,6 +75,7 @@ block content
           h5.features__header Comprehensive Search Filters
           p
             | FindReunite offers advanced search and filter options to help you quickly find missing persons. Utilize multiple filters such as age, gender, location, and last seen date to narrow down your search efficiently.
+          a#btn-search-person(href="/search-person") Search Missing
         .features__feature
           .features__icon
             svg
@@ -82,8 +83,9 @@ block content
           h5.features__header Stay Informed Effortlessly
           p
             | Receive instant email notifications whenever a newly reported missing person matches any found person in our database. This automated service ensures you are promptly alerted, enhancing the chances of reuniting loved ones quickly and effectively.
-        img.features__img.lazy-img(src='img/grow-lazy.jpg' data-src='img/grow.jpg' alt='Plant')
-        img.features__img.lazy-img(src='img/card-lazy.jpg' data-src='img/card.jpg' alt='Credit card')
+          a#btn-search-person(href="/search-person") Search Missing
+        img.features__img.lazy-img(src='img/email-lazy.jpg' data-src='img/email.jpg' alt='Email Notification image')
+        img.features__img.lazy-img(src='img/image-lazy.jpg' data-src='img/image.jpg' alt='Search Image image')
         .features__feature
           .features__icon
             svg
@@ -91,6 +93,7 @@ block content
           h5.features__header Advanced Image Search
           p
             | Easily search for missing persons using our cutting-edge image recognition technology. Our system compresses and processes images efficiently, allowing for quick and accurate matches, making your search faster and more effective.
+          a#btn-search-person(href="/search-person") Search Missing
 
 
 

@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
 
-  const adminBtn = document.getElementById('make-admin-btn');
+  const adminBtn = document.querySelectorAll('#make-admin-btn');
   const userBtn = document.getElementById('make-user-btn');
   const deleteUserButtons = document.querySelectorAll('#delete-user-btn');
 
@@ -379,12 +379,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   if (adminBtn)
-    adminBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      const userId = this.getAttribute('data-user-id');
+    adminBtn.forEach((btn) =>
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const userId = this.getAttribute('data-user-id');
 
-      roleManagement('admin', userId);
-    });
+        roleManagement('admin', userId);
+      }),
+    );
 
   if (userBtn)
     userBtn.addEventListener('click', function (e) {
