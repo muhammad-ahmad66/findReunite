@@ -69,8 +69,6 @@ block content
               i.fa-solid.fa-map-marker-alt
               a.overview-box__text(href=`https://www.google.com/maps?q=${person.user.city}`, target='_blank')= `${person.user.location.city}, ${person.user.location.country}`
 
-            
-
     .description-box
       //- h2.heading-secondary.ma-bt-lg= `About ${person.name}`
       img.person-detail-photo(src=`/img/persons/${person.photo}`, alt=`${person.name} picture`)

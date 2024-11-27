@@ -121,6 +121,8 @@ We would like to extend our deepest gratitude to our mentor, Sir Dr. Yesser Araf
   - **Email**: <creative@gmail.com>
 - **Name**: Hamid Ali Raza
   - **Email**: <himdaliraza@gmail.com>
+- **Name**: Ehtisham Rasool
+  - **Email**: <Ehtii.sham4277@gmail.com>
 
 Feel free to reach out to us for any questions or collaboration opportunities.
 

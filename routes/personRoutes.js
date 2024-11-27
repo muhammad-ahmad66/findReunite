@@ -34,7 +34,7 @@ router
   .patch(personController.updatePerson)
   .delete(
     authController.protect,
-    authController.restrictTo('admin'),
+    // authController.restrictTo('admin'),
     personController.deletePerson,
   );
 
